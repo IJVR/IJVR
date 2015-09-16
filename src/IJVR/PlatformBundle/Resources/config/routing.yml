@@ -1,0 +1,6 @@
+ijvr_platform_view:
+    path:     /article/{id}
+    defaults: { _controller: IJVRPlatformBundle:Default:view }
+oc_platform_view_slug:
+    path:      /{year}/{slug}.{format}
+    defaults:  { _controller: IJVRPlatformBundle:Default:viewSlug }

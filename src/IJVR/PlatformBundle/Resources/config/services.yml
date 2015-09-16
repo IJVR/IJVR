@@ -1,0 +1,4 @@
+services:
+#    ijvr_platform.example:
+#        class: IJVR\PlatformBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,3 @@
+ijvr_platform:
+    resource: "@IJVRPlatformBundle/Resources/config/routing.yml"
+    prefix:   /platform
