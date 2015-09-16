@@ -9,14 +9,14 @@ class DefaultController extends Controller
 {
     public function viewAction($id)
     {
-		 $url = $this->get('router')->generate(
-            'ijvr_platform_view', // 1er argument : le nom de la route
-            array('id' => id)    // 2e argument : les valeurs des paramètres
-        );
-		return new Response($url);
-        //return $this->render('IJVRPlatformBundle:Default:index.html.twig', array('id' => $id));
+		 
+       return $this->render('IJVRPlatformBundle:Default:index.html.twig', array('id' => $id));
     }
-	
+	public function homeAction()
+    {
+
+        return $this->render('IJVRPlatformBundle:Default:home.html.twig');
+    }
 	public function viewSlugAction($slug, $year, $format)
     {
         return new Response(

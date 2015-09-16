@@ -4,3 +4,6 @@ ijvr_platform_view:
 oc_platform_view_slug:
     path:      /{year}/{slug}.{format}
     defaults:  { _controller: IJVRPlatformBundle:Default:viewSlug }
+ijvr_platform_home:
+    path:     /
+    defaults: { _controller: IJVRPlatformBundle:Default:home }

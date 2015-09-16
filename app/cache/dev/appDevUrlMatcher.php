@@ -138,6 +138,15 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'oc_platform_view_slug')), array (  '_controller' => 'IJVR\\PlatformBundle\\Controller\\DefaultController::viewSlugAction',));
             }
 
+            // ijvr_platform_home
+            if (rtrim($pathinfo, '/') === '/platform') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'ijvr_platform_home');
+                }
+
+                return array (  '_controller' => 'IJVR\\PlatformBundle\\Controller\\DefaultController::homeAction',  '_route' => 'ijvr_platform_home',);
+            }
+
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();
