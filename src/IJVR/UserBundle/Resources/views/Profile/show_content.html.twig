@@ -1,0 +1,122 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="container">
+<h3>My Profile</h3><br> <a href="{{path('fos_user_profile_edit')}}">modify</a><br>
+<a href="{{path('fos_user_change_password')}}">change password</a>
+<div class="fos_user_user_show"><br>
+
+<address>
+  <strong>{{ 'profile.show.username'|trans }} :</strong>{{ user.username }}
+</address>
+
+<address>
+  <strong>{{ 'profile.show.email'|trans }} :</strong>{{ user.email }}
+</address>
+ 
+    
+</div>
+<br><br>
+<h4>Current Papers</h4>
+<br>
+<table class="table table-hover">
+	<tr>
+		<td>Action
+		</td>
+		<td>Title
+		</td>
+		<td>Upload Date
+		</td>
+		<td>Last Update Date
+		</td>
+		<td>Status
+		</td>
+	</tr>
+	{%for post in current %}
+		<tr>
+		<td><a target="__blank" href="{{ asset(post.pdf.webpath) }}">Voir</a>
+		</td>
+		<td>{{post.title}}
+		</td>
+		<td>{{post.date |date('m/d/Y')}}
+		</td>
+		<td>{{post.updateDate |date('m/d/Y')}}
+		
+		</td>
+		{%if post.status == 0%}
+		<td> Just being uploaded
+		</td>
+		{%else %}		
+			{%if post.status == 1%}
+			<td> being read
+			</td>
+			{%else %}
+				{%if post.status == 2%}
+				<td> correction to make
+				</td>
+				{%else %}
+					{%if post.status == 3%}
+					<td> correction made
+					</td>
+					{%else %}
+						{%if post.status == 4%}						
+						<td> Waiting to be published
+						</td>
+						{%else%}
+						<td>
+						rejected
+						</td>
+						{%endif%}
+					{%endif%}
+				{%endif%}
+			{%endif%}
+		{%endif%}
+	</tr>
+	
+	{%endfor%}
+</table>
+<br>
+
+<h4>Finished Papers</h4>
+
+<table class="table table-hover">
+	<tr>
+		<td>Action
+		</td>
+		<td>Issue
+		</td>
+		<td>Title
+		</td>
+		<td>Upload Date
+		</td>
+		<td>End Date
+		</td>
+		<td>Status
+		</td>
+	</tr>
+	
+	{%for post in finished %}
+		<tr>
+		<td><a target="__blank" href="{{ asset(post.pdf.webpath) }}">Voir</a>
+		</td>
+		<td>{{post.issue.title}}
+		</td>
+		<td>{{post.title}}
+		</td>
+		<td>{{post.date |date('m/d/Y')}}
+		</td>
+		<td>{{post.publishDate |date('m/d/Y')}}
+		</td>
+		
+		{%if post.status == 5%}
+		<td> Rejected
+		</td>
+		{%else %}	
+
+		<td> Published
+		</td>
+		{%endif%}
+	</tr>
+	{%endfor%}
+</table>
+
+<br><br><br>
+</div>

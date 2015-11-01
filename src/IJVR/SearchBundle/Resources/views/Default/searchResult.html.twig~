@@ -1,0 +1,109 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+<br/>
+<br/>
+
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h2>
+				Search Results
+			</h2>
+			<p>
+				<span>There are</span> <strong>3974</strong> <span>results for:</span> <strong>Computer Animation and Virtual Worlds</strong>
+			</p>
+			<p>
+				<a class="btn" href="#"></a>
+			</p>
+			<div class="row">
+				<div class="col-md-3">
+					<h3>
+						Filter List
+					</h3>
+					
+						<div class="form-group">
+							 
+							<label for="exampleInputEmail1">
+								Year
+							</label><br>
+							<input type="checkbox" /> 2015(1)<br>
+						</div>
+						<div class="form-group">
+							 
+							<label for="exampleInputPassword1">
+								Issue Title
+							</label><br>
+							<input type="checkbox" /> Computer Animation and Virtual Worlds(1)<br>
+							
+						</div>
+						<div class="form-group">
+							 
+							<label for="exampleInputFile">
+								Topic
+							</label><br>
+							<input type="checkbox" /> technology (1)<br>
+						</div>
+						
+						
+						
+					
+				</div>
+				<div class="col-md-6">
+					<div class="row">
+						{#{% for article in articles %} #}
+						<p> </p>
+		
+
+						<div class="col-md-12">
+						
+							 <a href="#"><h3>Real Time Animation of Virtual Humans: A Trade-off Between Naturalness and Control{#{{ article.title }}#}</h3></a>
+							<dl>
+								<dt>
+									<h3>
+										COMPUTER GRAPHICS FORUM
+									</h3>
+									<p>
+										Volume 29, Issue 8, December 2010, Pages: 2530–2554, H. Van Welbergen, B. J. H. Van Basten, A. Egges, Zs. M. Ruttkay and M. H. Overmars
+									</p>
+									<p>
+										Article first published online : 9 SEP 2010, DOI: 10.1111/j.1467-8659.2010.01822.x<a href="#"> &nbsp; Download PDF</a>
+									</p>
+								</dt>
+							</dl>
+						</div>
+						{#{% endfor %}#}
+					</div>
+					<ul class="pagination">
+						<li>
+							<a href="#">Prev</a>
+						</li>
+						<li>
+							<a href="#">1</a>
+						</li>
+						<li>
+							<a href="#">2</a>
+						</li>
+						<li>
+							<a href="#">3</a>
+						</li>
+						<li>
+							<a href="#">4</a>
+						</li>
+						<li>
+							<a href="#">5</a>
+						</li>
+						<li>
+							<a href="#">Next</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

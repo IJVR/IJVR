@@ -1,0 +1,240 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+<br/>
+<br/>
+
+
+<div class="container-fluid">
+	<div class="row" id="AppendToElem">
+		<div class="col-md-12">
+			<h2>
+				Search Results
+			</h2>
+			<p>
+				<span>There are</span> <strong>{{articles|length}}</strong> <span>results for:</span> <strong>{{title}}</strong>
+			</p>
+			<p>
+				<a class="btn" href="#"></a>
+			</p>
+			<div class="row" id="AppendToRow">
+				<div class="col-md-3">
+					<h3>
+						Filter List
+					</h3>
+					       
+						<div class="form-group" id="checkboxDate">
+							 
+							<label for="exampleInputEmail1">
+								Year
+							</label><br>
+							{% for article in articles %}
+							<input class="date" type="checkbox" value="{{article.date |date("Y")}}" /> {{article.date |date("Y")}}<br>
+							{% endfor %}
+						</div>
+						
+						
+						<div class="form-group" id="checkboxTitle">
+							 
+							<label for="exampleInputPassword1">
+								Issue Title
+							</label><br>
+							{% for article in articles %}
+							<input class="issueTitle" type="checkbox" value="{{article.issue.title}}"/> {{article.issue.title}}<br>
+							{% endfor %}
+						</div>
+						
+						
+						<div class="form-group" id="checkboxkeywords">
+							 
+							<label for="exampleInputFile">
+								Topic
+							</label><br>
+							{% for article in articles %}
+								{% for keyword in article.keywords %}
+							<input class="keywords" type="checkbox" value="{{keyword.keyword}}"/> {{keyword.keyword}}<br>
+								{% endfor %}
+							{% endfor %}
+						</div>
+						
+						<div class="form-group" id="checkboxauthors">
+							 
+							<label for="exampleInputFile">
+								Authors
+							</label><br>
+							{% for article in articles %}
+								{% for author in article.authors %}
+							<input class="authors" type="checkbox" value="{{author.name}}"/> {{author.name}}<br>
+								{% endfor %}
+							{% endfor %}
+						</div>
+						
+					
+				</div>
+				<div class="col-md-6">
+					<div class="row">
+						{% for article in articles %} 
+						<p> </p>
+		
+
+						<div class="col-md-12">
+						
+							 <a href="{{path('ijvr_search_single_article',{'id':article.id})}}"><h3>{{ article.title }}</h3></a>
+							<dl>
+								<dt>
+									<h3>
+										{{article.issue.title}}
+									</h3>
+									<p>
+										Volume {{article.issue.volume.id}}, Issue {{article.issue.id}} , {{article.issue.volume.year}}, Pages: 2530–2554, 
+									</p>
+									<p>
+										Article first published online : {{article.date |date("m/d/Y")}}, DOI: 10.1111/j.1467-8659.2010.01822.x<a href="{{article.pdf.url}}"> &nbsp; Download PDF</a>
+									</p>
+								</dt>
+							</dl>
+						</div>
+						{% endfor %}
+					</div>
+					<ul class="pagination">
+						
+						<li>
+							<a href="#">Prev</a>
+						</li>
+						{% for article in articles %} 
+						<li>
+							<a href="#"> {{ loop.index }} </a>
+						</li>
+						{% endfor %}
+						<li>
+							<a href="#">Next</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+ <script>
+console.log("dkhelt")
+
+var datao = {  title : "{{title}}"  ,  date:"{{date}}" , issueTitle :"{{issueTitle}}", keywords :[] , authors:[]} ;
+
+console.log(datao)
+
+$(document).on("click",".date, .issueTitle, .keywords, .authors",function(event){
+
+console.log($(this).attr('class'))
+$(".col-md-12").remove();
+console.log("{{title}}")
+console.log(datao)
+ if($(this).attr('class')==="date")
+	datao["date"]=$(this).val()
+if($(this).attr('class')==="issueTitle")
+	datao["issueTitle"]=$(this).val()
+if($(this).attr('class')==="keywords")
+	datao["keywords"].push($(this).val())
+if($(this).attr('class')==="authors")
+	datao["authors"].push($(this).val())
+
+
+console.log(datao["keywords"])
+
+
+console.log(datao)
+
+
+
+
+ $.ajax({
+         url: "criteria_search",          
+         type: 'POST', //I want a type as POST
+         data: datao,
+         success: function(data){ 
+         articles=$.parseJSON(data)
+         console.log(articles)
+		 
+
+         var uniqueIssueTitles= $.unique(articles.map(function (d) {
+    return d.issue.title;}));
+var uniqueDates= $.unique(articles.map(function (d) {
+    return d.date.date.substring(0,4);}));
+
+		 
+	$("#AppendToElem").append(" <div class=\"col-md-12\"> <h2> Search Results <\/h2> <p> <span>There are<\/span> <strong>"+articles.length+"<\/strong> <span> results for:<\/span> <strong>{{title}}<\/strong> <\/p> <p> <a class=\"btn\" href=\"#\"><\/a> <\/p> <div class=\"row\" id=\"AppendToRow\"> <div class=\"col-md-3\" id=\"AppendToCol3\"> <h3> Filter List <\/h3> <div class=\"form-group\" id=\"checkboxDate\" > <label for=\"exampleInputEmail1\"> Year <\/label><br>");	
+	  $.each(uniqueDates, function(index,jsonObject){
+	   
+        $("#checkboxDate").append("<input class=\"date\" type=\"checkbox\" value="+jsonObject+" /> "+jsonObject+ "<br>") 
+         });
+ $("#AppendToCol3").append("<\/div> <div class=\"form-group\" id=\"checkboxTitle\"> <label for=\"exampleInputPassword1\"> Issue Title <\/label><br>");
+	 
+	  $.each(uniqueIssueTitles, function(index,jsonObject){
+	   
+        $("#checkboxTitle").append("<input  class=\"issueTitle\" type=\"checkbox\" value="+jsonObject+" /> "+jsonObject+ "<br>") 
+         });
+		 $("#AppendToCol3").append("<\/div> <div class=\"form-group\" id=\"checkboxkeywords\"> <label for=\"exampleInputFile\"> Topic <\/label><br>");
+		  $.each(articles, function(index,article){
+		  		$.each(article.keywords, function(index,keyword){
+		  $("#checkboxkeywords").append("<input class=\"keywords\" type=\"checkbox\" value="+keyword.keyword+" /> "+keyword.keyword+ "<br>") 
+		  			});
+         });
+
+
+		   $("#AppendToCol3").append("<\/div> <div class=\"form-group\" id=\"checkboxauthors\"> <label for=\"exampleInputFile\"> Authors <\/label><br>");
+		  $.each(articles, function(index,article){
+		  		$.each(article.authors, function(index,author){
+		  $("#checkboxauthors").append("<input class=\"authors\" type=\"checkbox\" value="+author.name+" /> "+author.name+ "<br>") 
+		  			});
+         });
+
+		 $("#AppendToRow").append("<\/div> <\/div> <div class=\"col-md-6\" id=\"AppendToCol6\" > <div class=\"row\">")
+		  $.each(articles, function(index,jsonObject){
+	   
+        $("#AppendToCol6").append("<p> <\/p> \r\n\r\n <div class=\"col-md-12\"  id=\"AppendToCol12\"> <a href=\"#singleArticle\"><h3>"+jsonObject.title+"<\/h3><\/a> <dl> <dt> <h3>" +jsonObject.issue.title+" <\/h3> <p> Volume Volume.id, Issue"+ jsonObject.issue.id+ ", article.issue.volume.year, Pages: 2530\u20132554,  <\/p> <p> Article first published online : "+jsonObject.date.date.substring(0,4)+", DOI: 10.1111\/j.1467-8659.2010.01822.x<a href=\"pdfurl\"> &nbsp; Download PDF<\/a> <\/p> <\/dt> <\/dl> <\/div>") 
+         });
+		 
+		  $("#AppendToCol6").append(" <\/div> <ul class=\"pagination\">  <li> <a href=\"#\">Prev<\/a> <\/li> <li> <a href=\"#\">1<\/a> <\/li> <li> <a href=\"#\">2<\/a> <\/li> <li> <a href=\"#\">3<\/a> <\/li> <li> <a href=\"#\">4<\/a> <\/li> <li> <a href=\"#\">5<\/a> <\/li> <li> <a href=\"#\">Next<\/a> <\/li> <\/ul> <\/div> <\/div> <\/div>");
+		 
+	/*		
+							
+							
+						
+				
+							
+						
+				
+         $.each(articles, function(index,jsonObject){
+	   
+         console.log(jsonObject.title)
+         });
+        
+ /* $.each( data, function( key, val ) {
+    console.log(key+"lol "+val)
+
+  });*/
+       console.log(data)  
+       
+            $(".row").append("");
+         },
+         error: function(xhr,textStatus,error){
+         console.log(xhr.statusText)
+         console.log(textStatus)
+         console.log(error)
+         console.log("makhdamch")
+         
+         }
+      });
+//$(this).attr("value")
+
+}
+);
+
+
+
+  </script>
+
+{% endblock %}

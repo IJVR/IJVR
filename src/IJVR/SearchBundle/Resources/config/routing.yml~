@@ -1,0 +1,19 @@
+ijvr_search_homepage:
+    path:     /index
+    defaults: { _controller: IJVRSearchBundle:Default:index }
+ijvr_minimal_search:
+    path:     /minimal_search
+    defaults: { _controller: IJVRSearchBundle:Default:minimalSearch}
+
+ijvr_search_single_article:
+    path:     /singleArticle
+    defaults: { _controller: IJVRSearchBundle:Default:singleArticle }
+
+ijvr_search_issue :
+    path: /issue_search
+    defaults: { _controller: IJVRSearchBundle:Default:getIssueByArticle }
+
+    
+ijvr_search_criteria :
+    path: /criteria_search
+    defaults: { _controller: IJVRSearchBundle:Default:findArticlesByCriteria }

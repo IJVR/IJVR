@@ -1,0 +1,30 @@
+ijvr_search_homepage:
+    path:     /index
+    defaults: { _controller: IJVRSearchBundle:Default:index }
+ijvr_minimal_search:
+    path:     /minimal_search
+    defaults: { _controller: IJVRSearchBundle:Default:minimalSearch}
+
+ijvr_search_single_article:
+    path:     /singleArticle/{id}
+    defaults: { _controller: IJVRSearchBundle:Default:singleArticle }
+
+ijvr_search_issue :
+    path: /issue_search
+    defaults: { _controller: IJVRSearchBundle:Default:searchForIssueFromAContainingArticle }
+
+ijvr_search_criteria :
+    path: /criteria_search
+    defaults: { _controller: IJVRSearchBundle:Default:findArticlesByCriteria }
+
+ijvr_go_to_advanced_search :
+    path: /advancedsearchview
+    defaults: { _controller: IJVRSearchBundle:Default:advancedSearchView} 
+
+ijvr_advanced_search :
+    path: /advancedsearch
+    defaults: { _controller: IJVRSearchBundle:Default:advancedSearch}
+
+ijvr_issue_content :
+    path: /issuecontent/{id}
+    defaults: { _controller: IJVRSearchBundle:Default:searchForIssueFromAContainingArticle}            

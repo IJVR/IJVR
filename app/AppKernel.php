@@ -17,6 +17,11 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),           
             new IJVR\PlatformBundle\IJVRPlatformBundle(),
+			new FOS\UserBundle\FOSUserBundle(),
+            new IJVR\UserBundle\IJVRUserBundle(),
+            new IJVR\PublishBundle\IJVRPublishBundle(),
+            new IJVR\SearchBundle\IJVRSearchBundle(),
+			new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

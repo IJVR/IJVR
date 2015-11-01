@@ -1,0 +1,171 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}
+  Moderation - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+{% set alias = 'posts' %}
+
+<div class="container" >
+
+   <h2 style="">Moderation</h2>
+   <table>
+	   <th>
+		   You need to moderate these articles<br><br>
+		</th>
+		<th>
+		</th>
+	</table>
+   
+   
+   <div class="bs-example">
+	<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#uploaded">Just being uploaded ( {{ posts|length }} )</a></li>
+    <li><a data-toggle="tab" href="#read">Being read ( {{ read|length }} )</a></li>
+    <li><a data-toggle="tab" href="#corrected">Corrected ( {{ correction|length }} )</a></li>	
+	</ul>
+	
+
+<div class="tab-content">
+        <div id="uploaded" class="tab-pane fade in active">
+	   <h4>Articles just being uploaded</h4><br><br>
+   {%set i=0 %}   
+   <table class="table">
+
+		<!--AFFICHE TOUS LES POSTS A MODERER-->
+	   {%for post in posts%}
+	   
+	   {%if i==0 %}
+	   
+	   {%endif%}
+	   <tr>
+			<!--AFFICHE DU POST A MODERER-->
+			<td >
+				{{post.title}}<br>
+				Abstract: {{post.abstract}}<br>
+				<br><a target="_blank" href="{{ asset(post.pdf.webpath) }}">Download pdf</a>
+			</td>	   
+			<!--AFFICHE DES BOUTONS DE MODERATION-->
+			<td align="right">
+				
+				<div class="btn-group">
+				  <button type="button" class="btn btn-primary">Moderation</button>
+				  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span class="caret"></span>
+					<span class="sr-only">Toggle Dropdown</span>
+				  </button>
+				  <ul class="dropdown-menu">					
+					<li><a href="{{path('being_read',{'id': post.id})}}">Is being read</a></li>
+					<li><a href="{{path('correction_to_make',{'id': post.id})}}">Correction to make</a></li>
+					<li role="separator" class="divider"></li>
+					<li><a href="{{path('rejected',{'id': post.id})}}">Rejected</a></li>
+					<li><a href="{{path('waiting_to_publish',{'id': post.id})}}">Waiting to be published</a></li>					
+				  </ul>
+				</div>
+			</td>
+	   </tr>
+	   {%set i=i+1%}	   
+	   {%else%}	   
+			No article to moderate
+	   {%endfor%}
+	  
+	</table>
+	
+	</div>
+	
+     <div id="read" class="tab-pane fade">
+	<h4> Articles being read</h4><br><br>
+	{%set i=0 %}   
+   <table class="table">
+		<!--AFFICHE TOUS LES POSTS A MODERER-->
+	   {%for post in read%}
+	   
+	   {%if i==0 %}
+
+	   {%endif%}
+	   <tr>
+			<!--AFFICHE DU POST A MODERER-->
+			<td >
+				{{post.title}}<br>
+				Abstract: {{post.abstract}}<br>
+				<br><a target="_blank" href="{{ asset(post.pdf.webpath) }}">Download pdf</a>
+			</td>	   
+			<!--AFFICHE DES BOUTONS DE MODERATION-->
+			<td align="right">
+				
+				<div class="btn-group">
+				  <button type="button" class="btn btn-primary">Moderation</button>
+				  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span class="caret"></span>
+					<span class="sr-only">Toggle Dropdown</span>
+				  </button>
+				  <ul class="dropdown-menu">					
+					<li><a href="{{path('correction_to_make',{'id': post.id})}}">Correction to make</a></li>
+					<li role="separator" class="divider"></li>
+					<li><a href="{{path('rejected',{'id': post.id})}}">Rejected</a></li>
+					<li><a href="{{path('waiting_to_publish',{'id': post.id})}}">Waiting to be published</a></li>					
+				  </ul>
+				</div>
+			</td>
+	   </tr>
+	   {%set i=i+1%}	   
+	   {%else%}	   
+			No article to moderate
+	   {%endfor%}
+	  
+	</table>
+	</div>
+
+    <div id="corrected" class="tab-pane fade">
+	<h4> Articles corrected</h4><br><br>
+	{%set i=0 %}   
+   <table class="table">
+
+		<!--AFFICHE TOUS LES POSTS A MODERER-->
+	   {%for post in correction%}
+	   
+	   {%if i==0 %}
+
+	   {%endif%}
+	   <tr>
+			<!--AFFICHE DU POST A MODERER-->
+			<td >
+				{{post.title}}<br>
+				Authors: {{post.authors}}<br>
+				Abstract: {{post.abstract}}<br>
+				<br><a target="_blank" href="{{ asset(post.pdf.webpath) }}">Download pdf</a>
+			</td>	   
+			<!--AFFICHE DES BOUTONS DE MODERATION-->
+			<td align="right">
+				
+				<div class="btn-group">
+				  <button type="button" class="btn btn-primary">Moderation</button>
+				  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span class="caret"></span>
+					<span class="sr-only">Toggle Dropdown</span>
+				  </button>
+				  <ul class="dropdown-menu">
+					<li><a href="{{path('correction_to_make',{'id': post.id})}}">Correction to make</a></li>
+					<li role="separator" class="divider"></li>
+					<li><a href="{{path('rejected',{'id': post.id})}}">Rejected</a></li>
+					<li><a href="{{path('waiting_to_publish',{'id': post.id})}}">Waiting to be published</a></li>
+				  </ul>
+				</div>
+			</td>
+	   </tr>
+	   {%set i=i+1%}	   
+	   {%else%}	   
+			No article to moderate
+	   {%endfor%}
+	  
+	</table>
+	
+	</div>
+
+    </div></div>
+	
+</div>
+
+{% endblock %}

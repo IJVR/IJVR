@@ -1,0 +1,105 @@
+<?php
+
+namespace IJVR\SearchBundle\Controller;
+
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Serializer;
+
+/*
+
+Search Bundle default controller
+
+*/
+
+
+class DefaultController extends Controller
+{
+    public function indexAction()
+    {
+        return $this->render('IJVRSearchBundle:Default:index.html.twig');
+    }
+
+
+
+
+    //action for minimal search "by title"
+    public function minimalSearchAction()
+    {
+	 
+      	 $request = $this->get('request');
+	 if($request->getMethod()=='POST')
+		{
+		$title = $request->request->get('search_field');
+		$repository = $this->getDoctrine()->getRepository('IJVRPublishBundle:Article');
+		$articles=$repository->getArticlesByTitle($title);
+		return $this->render('IJVRSearchBundle:Default:searchResult.html.twig',array('articles' => $articles));
+		}
+			
+	 
+    }
+
+
+
+    //find Articles by criteria	
+    public function findArticlesByCriteriaAction()
+    {
+	$request= $this->get('request');
+	if($request->getMethod()=='POST')
+	{
+		$criteria=$request->request->get('criteria');
+		$value=$request->request->get('value');
+		$repository = $this->getDoctrine()->getRepository('IJVRPublishBundle:Article');
+		$articles=$repository->getArticlesByCriteria($criteria,$value);
+		$json = json_encode($articles);
+		//return $this->render('IJVRSearchBundle:Default:searchResult.html.twig',array('articles' => $articles));
+
+		if(isset($criteria) and isset($value))	
+		{	
+		return new Response($json);
+		}
+		else
+		return new Response('Hello world!');
+	}
+     }
+
+
+
+    //advanced research controller Action 
+    public function advancedSearchAction()
+    {
+	$request= $this->get('request');
+	if($request->getMethod()=='POST')
+	{
+		$articleId=$request->request->get('articleId');
+		$repository = $this->getDoctrine()->getRepository('IJVRPublishBundle:Article');
+		$articles=$repository->getArticlesAndIssueByArticleId($articleId);
+		return $this->render('IJVRSearchBundle:Default:searchResult.html.twig',array('articles' => $articles));
+	}
+
+     }
+
+    //getIssuebyArticle 
+    public function searchForIssueFromAContainingArticleAction()
+    {
+	$request= $this->get('request');
+	if($request->getMethod()=='POST')
+	{
+		$articleId=$request->request->get('articleId');
+		$repository = $this->getDoctrine()->getRepository('IJVRPublishBundle:Article');
+		$articles=$repository->getArticlesAndIssueByArticleId($articleId);
+		return $this->render('IJVRSearchBundle:Default:searchResult.html.twig',array('articles' => $articles));
+	}
+	}
+
+    //action for single article display	
+    public function singleArticleAction()
+    {
+        return $this->render('IJVRSearchBundle:Default:singleArticle.html.twig');
+    }	
+
+	
+}

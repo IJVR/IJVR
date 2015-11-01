@@ -1,3 +1,73 @@
+ijvr_search:
+    resource: "@IJVRSearchBundle/Resources/config/routing.yml"
+    prefix:   /search
+
+ijvr_publish:
+    resource: "@IJVRPublishBundle/Resources/config/routing.yml"
+    prefix:   /publish
+moderation:
+    pattern: /admin/moderation
+    defaults: { _controller: IJVRUserBundle:LienLogin:moderation }
+issue_publish:
+    pattern: /admin/publish_issue
+    defaults: { _controller: IJVRUserBundle:LienLogin:publish_issue }
+dashboard:
+    pattern: /admin/dashboard
+    defaults: { _controller: IJVRUserBundle:LienLogin:dashboard }
+gestion:
+    pattern: /admin/gestion
+    defaults: { _controller: IJVRUserBundle:LienLogin:gestion }	
+donne_admin:
+    pattern: /admin/donne_droits_admin/{id}
+    defaults: { _controller: IJVRUserBundle:LienLogin:donneadmin }
+retire_admin:
+    pattern: /admin/retire_droits_admin/{id}
+    defaults: { _controller: IJVRUserBundle:LienLogin:retireadmin }
+being_read:
+    pattern: /admin/being_read/{id}
+    defaults: { _controller: IJVRUserBundle:LienLogin:beingRead }
+correction_to_make:
+    pattern: /admin/correction_to_make/{id}
+    defaults: { _controller: IJVRUserBundle:LienLogin:correction_to_make}
+waiting_to_publish:
+    pattern: /admin/waiting/{id}
+    defaults: { _controller: IJVRUserBundle:LienLogin:waiting }
+rejected:
+    pattern: /admin/rejected/{id}
+    defaults: { _controller: IJVRUserBundle:LienLogin:rejected}
+published:
+    pattern: /admin/published/{id}
+    defaults: { _controller: IJVRUserBundle:LienLogin:published}
+
+approuvercommentaire:
+    pattern: /approuver/commentaire/{id}
+    defaults: { _controller: YWPPlatformBundle:Post:approuvercommentaire }
+    requirements:
+        _method: POST
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile
 ijvr_platform:
     resource: "@IJVRPlatformBundle/Resources/config/routing.yml"
     prefix:   /platform
+base:
+    pattern: /
+    defaults: { _controller: IJVRUserBundle:LienLogin:redirect }
+
+

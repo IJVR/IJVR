@@ -1,0 +1,120 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}
+   Access Management - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+   <h2 style="">Access Management</h2>
+   
+   {%set i=0 %}   
+   
+   <table class="table">
+		<th>
+			
+			Here you can manage the rigths you give to users
+		</th>
+	</table>
+	<!--POUR TOUS LES ADMIN -->
+   <table class="table">
+   <th>
+				Administrators<br><br>
+	
+			</th>
+			<th>
+			</th>
+   {%for user in admins%}
+   
+		{%if i==0 %}
+			
+		{%endif%}   
+   
+		<tr>
+			<!--ON LES AFFICHE-->
+			<td>				
+				   {{user.username}}			  
+			</td>
+   
+			<!--PUIS ON MET UN BOUTON POUR RETIRER LES DROITS D'ADMIN-->
+			<td align="right">
+				<button type="button" class="btn btn-primary"  onclick="	   
+				$.ajax({
+						type:'POST',
+						url:'{{path('retire_admin',{'id': user.id})}}',
+						data:'act=retire',
+						success: function(){
+						window.location = '';
+						}
+				});">
+					<i class="fa fa-wrench"></i>&nbsp;Take back admin rigths
+				</button>
+	  
+   
+			</td>
+		</tr>
+		{%set i=i+1%}
+   
+	{%else%}   
+			No admins
+   
+	{%endfor%}
+   	
+	<!--PAGINATION ADMIN-->				
+   </table>
+	
+   <br><br>
+   {%set i=0 %} 
+   
+   <!--POUR TOUS LES UTILISATEURS-->
+    <table class="table">
+	<th>
+					Users<br><br>
+	
+				</th>
+				<th></th>
+		{%for user in users%}
+   
+			{%if i==0 %}
+				
+			{%endif%}
+  
+			<tr>
+				<!--SON LES AFFICHE-->
+				<td>
+					
+					   {{user.username}}
+				 
+			   </td>
+				
+				<!--PUIS ON MET UN BOUTON POUR DONNER LES DROITS D'ADMIN-->
+				<td align="right">   
+					   <button type="button" class="btn btn-primary"  onclick="	  
+						   
+								$.ajax({
+									type:'POST',
+									url:'{{path('donne_admin',{'id': user.id})}}',
+									data:'act=donne',
+									success: function(){
+									window.location = '';
+									}
+								});"
+						>
+							<i class="fa fa-wrench"></i>&nbsp;Give admin rigths
+						</button>
+				</td>
+			</tr>
+			{%set i=i+1%}
+   
+		{%else%}   
+			No users
+		{%endfor%}
+	</table>
+	<!--PAGINATION UTILISATEURS-->
+	
+	<br><br>
+</div>
+
+{% endblock %}

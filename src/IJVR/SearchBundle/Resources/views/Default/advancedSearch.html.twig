@@ -1,0 +1,142 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+<script>$(document).ready(function() {
+    var max_fields      = 10; //maximum input boxes allowed
+    var wrapperKeywords        = $(".input_fields_wrap_keywords"); //Fields wrapper
+    var wrapperAuthors        = $(".input_fields_wrap_authors"); //Fields wrapper
+    var add_button      = $(".add_field_button"); //Add button ID
+    var add_author      = $(".add_author_button"); //Add button ID
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapperKeywords).append(' <div><input type="text" class="form-control" name="keywords[]"/><a href="#" class="remove_field ">Remove</a></div>'); //add input box
+        }
+    });
+
+     $(add_author).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapperAuthors).append(' <div><input type="text" class="form-control" name="authors[]"/><a href="#" class="remove_author ">Remove</a></div>'); //add input box
+        }
+    });
+    
+    $(wrapperKeywords).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    });
+
+    $(wrapperAuthors).on("click",".remove_author", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    });
+});
+
+
+
+
+
+</script>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h3>
+				Advanced Search
+			</h3>
+			<div class="row">
+				<div class="col-md-12">
+					
+					
+					<form class="form-horizontal" id="advancedSearchForm" method="POST" action="{{path('ijvr_advanced_search')}}">
+<fieldset>
+
+<!-- Form Name -->
+
+
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Article</label>  
+  <div class="col-md-4">
+  <input id="textinput" name="title" type="text"  class="form-control input-md">
+  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Issue</label>  
+  <div class="col-md-4">
+  <input id="textinput" name="issueTitle" type="text" class="form-control input-md">
+
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Keywords</label>  
+  <div class="col-md-4 input_fields_wrap_keywords">
+ 
+<button class="add_field_button btn btn-default glyphicon glyphicon-plus btn-xs">Add More keywords</button>
+  <input id="textinput3" name="keywords[]" type="text" class="form-control input-md"><br>
+  
+  </div>
+
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Authors</label>  
+  <div class="col-md-4 input_fields_wrap_authors">
+ 
+<button class="add_author_button btn btn-default glyphicon glyphicon-plus btn-xs">Add More Authors</button>
+  <input id="textinput4" name="authors[]" type="text" class="form-control input-md"><br>
+  
+  </div>
+
+
+
+</div>
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput"></label>  
+  <div class="col-md-4">
+  <button id="submitBtn" name="textinput" type="submit" class="btn btn-default">Search </button>
+    
+  </div>
+</div>
+
+</fieldset>
+</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+console.log($("#subhmitBtn"))
+$("#submitBtn").click(function(event) {
+console.log($('#textinput3').val())
+  
+    
+    var $nonempty = $('.form-control').filter(function() {
+    return this.value != ''
+  });
+
+  if ($nonempty.length == 0) {
+    
+     event.preventDefault();
+  }
+  
+       
+    
+});
+
+
+</script>
+{% endblock %}
+
+
+

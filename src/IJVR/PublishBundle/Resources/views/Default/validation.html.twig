@@ -1,0 +1,29 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} {% endblock %}
+
+{% block body %}
+
+
+
+
+<div class="container">
+		<h3> Your article has been sent to the editor </h3>
+		<br/>
+		<p>Now that you have submit your paper, you can track his submition.
+			Have a look on your <a href="{{path('fos_user_profile_show')}}">profile</a> or just click below.
+			<br/> 
+			You may have some notifications from the editor during the publishing process</p>
+
+
+			<div class="form-group">
+				
+		        
+				
+				<button type="button" class="btn btn-primary" onClick="location.href='{{path('fos_user_profile_show')}}'" >Track my paper
+				</button>
+		    </div>
+
+
+</div>
+{% endblock %}

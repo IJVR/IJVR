@@ -1,0 +1,14 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+<br/>
+<br/>
+
+<form action="issue_search" method="POST" >
+ <input type="text" name="articleId" />
+ <input type="submit" />
+</form>
+
+{% endblock %}

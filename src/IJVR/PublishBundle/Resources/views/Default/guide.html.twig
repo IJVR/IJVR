@@ -1,0 +1,114 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+
+
+
+
+<div class="container">
+	<h1>How to publish</h1>
+		<h3> Checklist of the various things to be included in your paper </h3>
+		<br/>
+		<ul class="list-group">
+			<div class="row">
+			    
+			    <div class="input-group">
+				    <span class="input-group-addon">
+				        <input type="checkbox" aria-label="...">
+				    </span>
+				    <li class="list-group-item">Paper title (only common VR abbreviations and your own defined abbreviations)</li>
+			    </div><!-- /input-group -->
+
+			    <br/>
+			    <div class="input-group">
+				    <span class="input-group-addon">
+				        <input type="checkbox" aria-label="...">
+				    </span>
+				    <li class="list-group-item">Authors names, their institutions, cities, and states or nations (lead author first, but other authors can be grouped by institution)</li>
+			    </div>
+
+			    <br/>
+			    <div class="input-group">
+				    <span class="input-group-addon">
+				        <input type="checkbox" aria-label="...">
+				    </span>
+				    <li class="list-group-item">Abstract (No symbols or references. English terminology only)</li>
+			    </div><!-- /input-group -->
+			
+				<br/>
+			    <div class="input-group">
+				    <span class="input-group-addon">
+				        <input type="checkbox" aria-label="...">
+				    </span>
+					<li class="list-group-item">4 to 6 key words (for searchable databases)</li>
+			    </div>
+
+			    <br/>
+			    <div class="input-group">
+				    <span class="input-group-addon">
+				        <input type="checkbox" aria-label="...">
+				    </span>
+					<li class="list-group-item">Introduction or Overview (Include descriptions or references to previous related work as well as how your work relates.)</li>
+			    </div>
+
+			    <br/>
+			    <div class="input-group">
+				    <span class="input-group-addon">
+				        <input type="checkbox" aria-label="...">
+				    </span>
+					<li class="list-group-item">Images, diagrams, tables, and equations, all labeled and referred to in the text (Make sure your images have a resolution of at least 300dpi if expanded to full page width. If a screen capture, temporarily increase your screen resolution to provide higher image resolution before you do the screen capture.) </li>
+			    </div>
+
+			    <br/>
+			    <div class="input-group">
+				    <span class="input-group-addon">
+				        <input type="checkbox" aria-label="...">
+				    </span>
+					<li class="list-group-item">Links to videos and other multimedia embedded in the text or the reference section. (Based on past experience, IPI Press believes links remain more permanent if directed to the ijvr.org website, so we provide authors with storage for those files if they choose to make use of it.)</li>
+			    </div>
+
+			    <br/>
+			    <div class="input-group">
+				    <span class="input-group-addon">
+				        <input type="checkbox" aria-label="...">
+				    </span>
+					<li class="list-group-item">Conclusion(s) (A summary of the results of the work you are reporting on.)</li>
+			    </div>
+
+			    <br/>
+			    <div class="input-group">
+				    <span class="input-group-addon">
+				        <input type="checkbox" aria-label="...">
+				    </span>
+					<li class="list-group-item">Acknowledgement(s) (for things that do not go in the references, such as organizations or individuals that provide special help or financial support for your research)</li>
+			    </div>
+
+			    <br/>
+			    <div class="input-group">
+				    <span class="input-group-addon">
+				        <input type="checkbox" aria-label="...">
+				    </span>
+					<li class="list-group-item">List of references referred to in the text of the paper</li>
+			    </div>
+
+			    <br/>
+			    <div class="input-group">
+				    <span class="input-group-addon">
+				        <input type="checkbox" aria-label="...">
+				    </span>
+					<li class="list-group-item">Biographies (Include a portrait photo and email address for each person. We recommend each coauthor write his/her own biography.)</li>
+				</div>
+		</ul>
+
+			<h4>Got everything ready ? Let's submit your paper </h4>
+ 
+			<div class="form-group">
+		       <button type="button" class="btn btn-primary"  onClick="location.href='{{path('ijvr_publish_submit')}}'">Submit</button>
+		    </div>
+	</div><!-- /.row -->
+
+	
+</div>
+{% endblock %}

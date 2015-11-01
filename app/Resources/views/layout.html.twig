@@ -2,18 +2,45 @@
 <html>
   <head>
     <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}IJVR{% endblock %}</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	
+	<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link href="{{ asset('css/fileinput.min.css') }}" rel="stylesheet" />
+	<link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+	<link href="{{ asset('css/bootstrap-tokenfield.min.css')}}"  media="all" rel="stylesheet" type="text/css" />
+	<script src="https://code.jquery.com/ui/jquery-ui-1-9-git.js" ></script>
+	<script src="{{ asset('js/fileinput.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/bootstrap-tokenfield.min.js')}}" ></script>
   </head>
   <body>
-  
+  <style>
+			  
+			   @media screen and (max-width: 480px){
+			   .btn-space{
+				font-size: 10px;
+			  }
+			  
+			  }
+			  
+		</style>
   <style>
   html,
+ 
+ 
       body {
         height: 100%;
         /* The html and body elements cannot have any padding or margin. */
       }
+	   .divider{
+    width:5px;
+    height:auto;
+    display:inline-block;
+}
+
+
   #wrap > .container {
         padding-top: 60px;
       }
@@ -32,14 +59,24 @@
       /* Set the fixed height of the footer here */
       #push,
       #footer {
-        height: 60px;
+        height: 30px;
       }
       #footer {
-        background-color: #f5f5f5;
+        background-color: #375A7F;
       }
+	  
+	  .wrapper{
+	  min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        /* Negative indent footer by it's height */
+        margin: 0 auto -30px;
+	  }
   </style>
   
-  <div id="wrap">
+ <div class="wrapper">
+ 
+ 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -50,7 +87,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Logo IJVR</a>
+      <a class="navbar-brand" href="{{path('ijvr_platform_home')}}">Logo  The International Journal of Virtual Reality</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -58,39 +95,58 @@
 
       
       <ul class="nav navbar-nav navbar-right">
-	  <form class="navbar-form navbar-left" role="search">
+	  <form class="navbar-form navbar-left" method="POST" action="{{path('ijvr_minimal_search')}}" role="search">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+          <input type="text" class="form-control" name="search_field" placeholder="Search">
         </div>
-        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
 		
       </form>
-        <li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
-		<li><a href="#"><span class="glyphicon glyphicon-off"></span></a></li>
+	  
+	  
+	  {% if is_granted("ROLE_ADMIN") %}
+	 <li > <a href="{{ path('issue_publish') }}" style="color:red"><i class="fa fa-upload"></i> </a></li>
+	  <li > <a href="{{ path('gestion') }}" style="color:red"><i class="fa fa-user-plus"></i> </a></li>
+	  <li > <a href="{{ path('moderation') }}" style="color:red"><i class="fa fa-flag"></i> </a></li>
+	 <li > <a href="{{ path('dashboard') }}" style="color:red"><i class="fa fa-tachometer"></i> </a></li>	  
+	  {%endif%}
+        <li><a href="{{path('ijvr_platform_home')}}"><i class="fa fa-home"></i></a></li>
+		
+		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+	  <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i></a></li>
+	  {%else%}
+	 <li><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in"></i></a></li>
+	  {%endif%}
+
 
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
-<div class="container" style="display:inline-block;">
-<button type="button" class="btn btn-primary">Search</button>
-<button type="button" class="btn btn-primary"  >Publish</button>
-<button type="button" class="btn btn-primary"  >Profile</button>
+<div class="container" >
+<button type="button" style="float:left;" class="btn  btn-primary btn-lg btn-space" onClick="location.href='{{path('ijvr_go_to_advanced_search')}}'"><i class="fa fa-search"></i> Search </button>
+   
+<center>
+<button type="button" class="btn btn-primary btn-lg btn-space"  onClick="location.href='{{path('ijvr_publish_index')}}'"><i class="fa fa-pencil"></i> Publish </button>
+  
+<button type="button" style="float:right;" class="btn btn-primary btn-lg btn-space" onClick="location.href='{{path('fos_user_profile_show')}}'" >
+<i class="fa fa-user"></i> Profile </button></center>
 </div>
     {% block body %}
     {% endblock %}
-	</div>
+	
 	<div id="push"></div>
+</div>
 	<div id="footer">
 		<div class="container" >
 			<div align="right" style="margin-bottom:0px;">
-			<a href="">Contact</a>&nbsp;
-			<a href="">About us</a>
+			<a href="{{path('ijvr_platform_contact')}}">Contact</a>&nbsp;
+			<a href="{{path('ijvr_platform_about')}}">About us</a>
 			</div>
 		</div>
 	</div>
-	 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	 
+
   </body>
 </html>

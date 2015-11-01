@@ -1,0 +1,4 @@
+services:
+#    ijvr_search.example:
+#        class: IJVR\SearchBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

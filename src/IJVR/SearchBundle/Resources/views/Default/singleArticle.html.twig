@@ -1,0 +1,110 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+
+ <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+		<br></br>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2">
+			<h3 class="text-left">
+				Table of contents
+			</h3>
+			<div class="panel-group" id="panel-835590">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						 <a class="panel-title" data-toggle="collapse" data-parent="#panel-835590" href="#panel-element-704681">Highlights
+
+
+</a>
+					</div>
+					<div id="panel-element-704681" class="panel-collapse collapse in">
+						<div class="panel-body">
+							Anim pariatur cliche...
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						 <a class="panel-title" data-toggle="collapse" data-parent="#panel-835590" href="#panel-element-360342">keywords</a>
+					</div>
+					<div id="panel-element-360342" class="panel-collapse collapse">
+						<div class="panel-body">
+							Anim pariatur cliche...
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="row">
+				<div class="col-md-2">
+					<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" class="img-thumbnail" />
+				</div>
+				<div class="col-md-6">
+					<h2>
+					{{article.title}}
+					</h2>
+					 <a href="{{path('ijvr_issue_content',{'id':article.id})}}" class="btn" type="button">I{{article.issue.title}}</a>
+					<p>
+					Volume {{article.issue.volume.id}} , {{article.date |date("m/Y")}}, Pages : {{article.pages}}
+					</p>
+					
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<h3 class="text-muted">
+						Abstract
+					</h3>
+					<p class="lead">
+						
+			{{article.abstract}}	</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+						<h3 class="text-muted">
+						Keywords
+					</h3>
+					<p>				
+	{% for keyword in article.keywords %} {{keyword.keyword}}	{% endfor %}</p>
+				
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			 
+			 <a href="{{asset(article.pdf.webpath)}}"><h3>Download PDF</h3></a>
+			<div class="row">
+				<div class="col-md-12">
+					<h2>
+						Metrics
+					</h2>
+					<p>
+						</p>
+<p>Source Normalized Impact per Paper (SNIP): 1.042</p>
+<p>SCImago Journal Rank (SJR): 0.489</p>
+<p>Impact Factor: 0.831</p>
+<p>5-Year Impact Factor: 1.311	</p>		
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+
+
