@@ -101,15 +101,11 @@
 					<ul class="pagination">
 						
 						<li>
-							<a href="#">Prev</a>
+							<a href="#prev">Prev</a>
 						</li>
-						{% for article in articles %} 
+					
 						<li>
-							<a href="#"> {{ loop.index }} </a>
-						</li>
-						{% endfor %}
-						<li>
-							<a href="#">Next</a>
+							<a href="#next">Next</a>
 						</li>
 					</ul>
 				</div>
@@ -194,10 +190,10 @@ var uniqueDates= $.unique(articles.map(function (d) {
 		 $("#AppendToRow").append("<\/div> <\/div> <div class=\"col-md-6\" id=\"AppendToCol6\" > <div class=\"row\">")
 		  $.each(articles, function(index,jsonObject){
 	   
-        $("#AppendToCol6").append("<p> <\/p> \r\n\r\n <div class=\"col-md-12\"  id=\"AppendToCol12\"> <a href=\"#singleArticle\"><h3>"+jsonObject.title+"<\/h3><\/a> <dl> <dt> <h3>" +jsonObject.issue.title+" <\/h3> <p> Volume Volume.id, Issue"+ jsonObject.issue.id+ ", article.issue.volume.year, Pages: 2530\u20132554,  <\/p> <p> Article first published online : "+jsonObject.date.date.substring(0,4)+", DOI: 10.1111\/j.1467-8659.2010.01822.x<a href=\"pdfurl\"> &nbsp; Download PDF<\/a> <\/p> <\/dt> <\/dl> <\/div>") 
+        $("#AppendToCol6").append("<p> <\/p> \r\n\r\n <div class=\"col-md-12\"  id=\"AppendToCol12\"> <a href=\"singleArticle/"+jsonObject.id+"\"><h3>"+jsonObject.title+"<\/h3><\/a> <dl> <dt> <h3>" +jsonObject.issue.title+" <\/h3> <p> Volume Volume.id, Issue"+ jsonObject.issue.id+ ", article.issue.volume.year, Pages: 2530\u20132554,  <\/p> <p> Article first published online : "+jsonObject.date.date.substring(0,4)+", DOI: 10.1111\/j.1467-8659.2010.01822.x<a href=\"pdfurl\"> &nbsp; Download PDF<\/a> <\/p> <\/dt> <\/dl> <\/div>") 
          });
 		 
-		  $("#AppendToCol6").append(" <\/div> <ul class=\"pagination\">  <li> <a href=\"#\">Prev<\/a> <\/li> <li> <a href=\"#\">1<\/a> <\/li> <li> <a href=\"#\">2<\/a> <\/li> <li> <a href=\"#\">3<\/a> <\/li> <li> <a href=\"#\">4<\/a> <\/li> <li> <a href=\"#\">5<\/a> <\/li> <li> <a href=\"#\">Next<\/a> <\/li> <\/ul> <\/div> <\/div> <\/div>");
+		  $("#AppendToCol6").append(" <\/div> <ul class=\"pagination\">  <li> <a href=\"#prev\">Prev<\/a> <\/li> <li> <a href=\"#next\">Next<\/a> <\/li> <\/ul> <\/div> <\/div> <\/div>");
 		 
 	/*		
 							

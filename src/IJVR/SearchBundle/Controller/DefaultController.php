@@ -33,14 +33,21 @@ class DefaultController extends Controller
     {
 	 
      $request = $this->get('request');
-	 
+	 if($request->getMethod()=='POST')
+    {
 		$title = $request->request->get('search_field');
 		$repository = $this->getDoctrine()->getRepository('IJVRPublishBundle:Article');
 		$articles=$repository->getArticlesByTitle($title);
 		$issueTitle=" " ;
         $date=" ";
 		return $this->render('IJVRSearchBundle:Default:searchResult.html.twig',array('articles' => $articles ,'title' => $title, 'issueTitle'=>$issueTitle, 'date'=>$date));
-		
+		}
+    else
+    {
+        $response = new Response();
+        $response->setStatusCode(403);
+        return $response;
+    }
     }
 
 
@@ -84,7 +91,8 @@ class DefaultController extends Controller
     public function advancedSearchAction()
     {
 	$request= $this->get('request');
-    
+        if($request->getMethod()=='POST')
+    {
     	$abstract=$request->request->get('abstract'); 
     	$title=$request->request->get('title'); 
     	$keywords=array();
@@ -97,13 +105,15 @@ class DefaultController extends Controller
 
 		$repository = $this->getDoctrine()->getRepository('IJVRPublishBundle:Article');
 		
-		$articles=$repository->getArticlesByMultipleCriterias($abstract,$title,$keywords,$issueTitle,$year,$authors);
+        $str=mysql_real_escape_string($title);
+
+		$articles=$repository->getArticlesByMultipleCriterias($abstract,$str,$keywords,$issueTitle,$year,$authors);
       
         
         
         
         return $this->render('IJVRSearchBundle:Default:searchResult.html.twig',array('articles' => $articles ,'title' => $title, 'date' => $year , 'issueTitle'=> $issueTitle));
-
+    }
 	
 
      }
