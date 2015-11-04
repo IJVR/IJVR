@@ -33,21 +33,41 @@ class DefaultController extends Controller
     {
 	 
      $request = $this->get('request');
-	 if($request->getMethod()=='POST')
-    {
+	
 		$title = $request->request->get('search_field');
 		$repository = $this->getDoctrine()->getRepository('IJVRPublishBundle:Article');
 		$articles=$repository->getArticlesByTitle($title);
-		$issueTitle=" " ;
-        $date=" ";
-		return $this->render('IJVRSearchBundle:Default:searchResult.html.twig',array('articles' => $articles ,'title' => $title, 'issueTitle'=>$issueTitle, 'date'=>$date));
-		}
-    else
-    {
-        $response = new Response();
-        $response->setStatusCode(403);
-        return $response;
-    }
+		$issueTitle=null ;
+        $date=null;
+        $issues = array();
+        $authors=array();
+        $keywords=array();
+        $dates=array();
+
+        foreach($articles as $article)
+        {
+                array_push($dates,$article->getDate()->format('Y'));
+                array_push($issues, $article->getIssue()->getTitle());
+                foreach($article->getAuthors() as $author)
+                {
+                    array_push($authors, $author->getName());
+                }
+                foreach($article->getKeywords() as $keyword)
+                {
+                    array_push($keywords, $keyword->getKeyword());
+                }
+
+        }
+
+
+        $dates=array_unique($dates);
+        $issues=array_unique($issues);
+        $authors=array_unique($authors);
+        $keywords=array_unique($keywords);
+		return $this->render('IJVRSearchBundle:Default:searchResult.html.twig',array('articles' => $articles ,'title' => $title, 'issueTitle'=>$issueTitle,
+         'date'=>$date, 'issues'=>$issues, 'authors'=> $authors, 'keywords'=>$keywords, 'dates' => $dates));
+		
+ 
     }
 
 
@@ -105,9 +125,9 @@ class DefaultController extends Controller
 
 		$repository = $this->getDoctrine()->getRepository('IJVRPublishBundle:Article');
 		
-        $str=mysql_real_escape_string($title);
+       // $str=mysql_real_escape_string($title);
 
-		$articles=$repository->getArticlesByMultipleCriterias($abstract,$str,$keywords,$issueTitle,$year,$authors);
+		$articles=$repository->getArticlesByMultipleCriterias($abstract,$title,$keywords,$issueTitle,$year,$authors);
       
         
         

@@ -17,8 +17,8 @@ class __TwigTemplate_c1eac89f1c26d40cb068475421644ff21127aa67c946b22e409ce9153e5
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_53aadf96aef23eff6a152d17c2d75c5f7817c0e765014df6f86e09ef8626f110 = $this->env->getExtension("native_profiler");
-        $__internal_53aadf96aef23eff6a152d17c2d75c5f7817c0e765014df6f86e09ef8626f110->enter($__internal_53aadf96aef23eff6a152d17c2d75c5f7817c0e765014df6f86e09ef8626f110_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "::layout.html.twig"));
+        $__internal_d11b3390e32bc8dec2d0998280da3b963a685d8ebb7d3183616d4c6ab32d58f5 = $this->env->getExtension("native_profiler");
+        $__internal_d11b3390e32bc8dec2d0998280da3b963a685d8ebb7d3183616d4c6ab32d58f5->enter($__internal_d11b3390e32bc8dec2d0998280da3b963a685d8ebb7d3183616d4c6ab32d58f5_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "::layout.html.twig"));
 
         // line 1
         echo "<!DOCTYPE HTML>
@@ -131,7 +131,11 @@ class __TwigTemplate_c1eac89f1c26d40cb068475421644ff21127aa67c946b22e409ce9153e5
       <a class=\"navbar-brand\" href=\"";
         // line 90
         echo $this->env->getExtension('routing')->getPath("ijvr_platform_home");
-        echo "\">Logo  The International Journal of Virtual Reality</a>
+        echo "\">
+      <img src=\" ";
+        // line 91
+        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/logo.png"), "html", null, true);
+        echo "\" style=\"height:60px;position:absolute;top:0;\"></img></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -140,7 +144,7 @@ class __TwigTemplate_c1eac89f1c26d40cb068475421644ff21127aa67c946b22e409ce9153e5
       
       <ul class=\"nav navbar-nav navbar-right\">
 \t  <form class=\"navbar-form navbar-left\" method=\"POST\" action=\"";
-        // line 98
+        // line 99
         echo $this->env->getExtension('routing')->getPath("ijvr_minimal_search");
         echo "\" role=\"search\">
         <div class=\"form-group\">
@@ -152,47 +156,47 @@ class __TwigTemplate_c1eac89f1c26d40cb068475421644ff21127aa67c946b22e409ce9153e5
 \t  
 \t  
 \t  ";
-        // line 107
+        // line 108
         if ($this->env->getExtension('security')->isGranted("ROLE_ADMIN")) {
-            // line 108
+            // line 109
             echo "\t <li > <a href=\"";
             echo $this->env->getExtension('routing')->getPath("issue_publish");
             echo "\" style=\"color:red\"><i class=\"fa fa-upload\"></i> </a></li>
 \t  <li > <a href=\"";
-            // line 109
+            // line 110
             echo $this->env->getExtension('routing')->getPath("gestion");
             echo "\" style=\"color:red\"><i class=\"fa fa-user-plus\"></i> </a></li>
 \t  <li > <a href=\"";
-            // line 110
+            // line 111
             echo $this->env->getExtension('routing')->getPath("moderation");
             echo "\" style=\"color:red\"><i class=\"fa fa-flag\"></i> </a></li>
 \t <li > <a href=\"";
-            // line 111
+            // line 112
             echo $this->env->getExtension('routing')->getPath("dashboard");
             echo "\" style=\"color:red\"><i class=\"fa fa-tachometer\"></i> </a></li>\t  
 \t  ";
         }
-        // line 113
+        // line 114
         echo "        <li><a href=\"";
         echo $this->env->getExtension('routing')->getPath("ijvr_platform_home");
         echo "\"><i class=\"fa fa-home\"></i></a></li>
 \t\t
 \t\t";
-        // line 115
+        // line 116
         if ($this->env->getExtension('security')->isGranted("IS_AUTHENTICATED_REMEMBERED")) {
-            // line 116
+            // line 117
             echo "\t  <li><a href=\"";
             echo $this->env->getExtension('routing')->getPath("fos_user_security_logout");
             echo "\"><i class=\"fa fa-sign-out\"></i></a></li>
 \t  ";
         } else {
-            // line 118
+            // line 119
             echo "\t <li><a href=\"";
             echo $this->env->getExtension('routing')->getPath("fos_user_security_login");
-            echo "\"><i class=\"fa fa-sign-in\"></i></a></li>
+            echo "\">log in</i></a></li>
 \t  ";
         }
-        // line 120
+        // line 121
         echo "
 
       </ul>
@@ -202,26 +206,26 @@ class __TwigTemplate_c1eac89f1c26d40cb068475421644ff21127aa67c946b22e409ce9153e5
 
 <div class=\"container\" >
 <button type=\"button\" style=\"float:left;\" class=\"btn  btn-primary btn-lg btn-space\" onClick=\"location.href='";
-        // line 128
+        // line 129
         echo $this->env->getExtension('routing')->getPath("ijvr_go_to_advanced_search");
         echo "'\"><i class=\"fa fa-search\"></i> Search </button>
    
 <center>
 <button type=\"button\" class=\"btn btn-primary btn-lg btn-space\"  onClick=\"location.href='";
-        // line 131
+        // line 132
         echo $this->env->getExtension('routing')->getPath("ijvr_publish_index");
         echo "'\"><i class=\"fa fa-pencil\"></i> Publish </button>
   
 <button type=\"button\" style=\"float:right;\" class=\"btn btn-primary btn-lg btn-space\" onClick=\"location.href='";
-        // line 133
+        // line 134
         echo $this->env->getExtension('routing')->getPath("fos_user_profile_show");
         echo "'\" >
 <i class=\"fa fa-user\"></i> Profile </button></center>
 </div>
     ";
-        // line 136
+        // line 137
         $this->displayBlock('body', $context, $blocks);
-        // line 138
+        // line 139
         echo "\t
 \t<div id=\"push\"></div>
 </div>
@@ -229,11 +233,11 @@ class __TwigTemplate_c1eac89f1c26d40cb068475421644ff21127aa67c946b22e409ce9153e5
 \t\t<div class=\"container\" >
 \t\t\t<div align=\"right\" style=\"margin-bottom:0px;\">
 \t\t\t<a href=\"";
-        // line 144
-        echo $this->env->getExtension('routing')->getPath("ijvr_platform_contact");
-        echo "\">Contact</a>&nbsp;
-\t\t\t<a href=\"";
         // line 145
+        echo $this->env->getExtension('routing')->getPath("ijvr_platform_contact");
+        echo "\">Contact</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\t\t\t<a href=\"";
+        // line 146
         echo $this->env->getExtension('routing')->getPath("ijvr_platform_about");
         echo "\">About us</a>
 \t\t\t</div>
@@ -245,32 +249,32 @@ class __TwigTemplate_c1eac89f1c26d40cb068475421644ff21127aa67c946b22e409ce9153e5
 </html>
 ";
         
-        $__internal_53aadf96aef23eff6a152d17c2d75c5f7817c0e765014df6f86e09ef8626f110->leave($__internal_53aadf96aef23eff6a152d17c2d75c5f7817c0e765014df6f86e09ef8626f110_prof);
+        $__internal_d11b3390e32bc8dec2d0998280da3b963a685d8ebb7d3183616d4c6ab32d58f5->leave($__internal_d11b3390e32bc8dec2d0998280da3b963a685d8ebb7d3183616d4c6ab32d58f5_prof);
 
     }
 
     // line 6
     public function block_title($context, array $blocks = array())
     {
-        $__internal_96e0c349ab9bf67414b99572192923cbede3f0a2c52a2596b8bd021fb9811839 = $this->env->getExtension("native_profiler");
-        $__internal_96e0c349ab9bf67414b99572192923cbede3f0a2c52a2596b8bd021fb9811839->enter($__internal_96e0c349ab9bf67414b99572192923cbede3f0a2c52a2596b8bd021fb9811839_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
+        $__internal_9c03a93a97c59e24beb385fb49454009f8f708756f871d3a487c02d5a752fabc = $this->env->getExtension("native_profiler");
+        $__internal_9c03a93a97c59e24beb385fb49454009f8f708756f871d3a487c02d5a752fabc->enter($__internal_9c03a93a97c59e24beb385fb49454009f8f708756f871d3a487c02d5a752fabc_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
 
         echo "IJVR";
         
-        $__internal_96e0c349ab9bf67414b99572192923cbede3f0a2c52a2596b8bd021fb9811839->leave($__internal_96e0c349ab9bf67414b99572192923cbede3f0a2c52a2596b8bd021fb9811839_prof);
+        $__internal_9c03a93a97c59e24beb385fb49454009f8f708756f871d3a487c02d5a752fabc->leave($__internal_9c03a93a97c59e24beb385fb49454009f8f708756f871d3a487c02d5a752fabc_prof);
 
     }
 
-    // line 136
+    // line 137
     public function block_body($context, array $blocks = array())
     {
-        $__internal_86c1bc2fe01314af27e95a027ba72e6a075dbf032f7de51786ffe3464d6ccda6 = $this->env->getExtension("native_profiler");
-        $__internal_86c1bc2fe01314af27e95a027ba72e6a075dbf032f7de51786ffe3464d6ccda6->enter($__internal_86c1bc2fe01314af27e95a027ba72e6a075dbf032f7de51786ffe3464d6ccda6_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_8dd0a5d545d049655c10c1a3ab78445b68266dbe4ab5930227cce87f5c5e9a64 = $this->env->getExtension("native_profiler");
+        $__internal_8dd0a5d545d049655c10c1a3ab78445b68266dbe4ab5930227cce87f5c5e9a64->enter($__internal_8dd0a5d545d049655c10c1a3ab78445b68266dbe4ab5930227cce87f5c5e9a64_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
-        // line 137
+        // line 138
         echo "    ";
         
-        $__internal_86c1bc2fe01314af27e95a027ba72e6a075dbf032f7de51786ffe3464d6ccda6->leave($__internal_86c1bc2fe01314af27e95a027ba72e6a075dbf032f7de51786ffe3464d6ccda6_prof);
+        $__internal_8dd0a5d545d049655c10c1a3ab78445b68266dbe4ab5930227cce87f5c5e9a64->leave($__internal_8dd0a5d545d049655c10c1a3ab78445b68266dbe4ab5930227cce87f5c5e9a64_prof);
 
     }
 
@@ -286,7 +290,7 @@ class __TwigTemplate_c1eac89f1c26d40cb068475421644ff21127aa67c946b22e409ce9153e5
 
     public function getDebugInfo()
     {
-        return array (  271 => 137,  265 => 136,  253 => 6,  237 => 145,  233 => 144,  225 => 138,  223 => 136,  217 => 133,  212 => 131,  206 => 128,  196 => 120,  190 => 118,  184 => 116,  182 => 115,  176 => 113,  171 => 111,  167 => 110,  163 => 109,  158 => 108,  156 => 107,  144 => 98,  133 => 90,  56 => 16,  52 => 15,  47 => 13,  42 => 11,  35 => 7,  31 => 6,  24 => 1,);
+        return array (  275 => 138,  269 => 137,  257 => 6,  241 => 146,  237 => 145,  229 => 139,  227 => 137,  221 => 134,  216 => 132,  210 => 129,  200 => 121,  194 => 119,  188 => 117,  186 => 116,  180 => 114,  175 => 112,  171 => 111,  167 => 110,  162 => 109,  160 => 108,  148 => 99,  137 => 91,  133 => 90,  56 => 16,  52 => 15,  47 => 13,  42 => 11,  35 => 7,  31 => 6,  24 => 1,);
     }
 }
 /* <!DOCTYPE HTML>*/
@@ -378,7 +382,8 @@ class __TwigTemplate_c1eac89f1c26d40cb068475421644ff21127aa67c946b22e409ce9153e5
 /*         <span class="icon-bar"></span>*/
 /*         <span class="icon-bar"></span>*/
 /*       </button>*/
-/*       <a class="navbar-brand" href="{{path('ijvr_platform_home')}}">Logo  The International Journal of Virtual Reality</a>*/
+/*       <a class="navbar-brand" href="{{path('ijvr_platform_home')}}">*/
+/*       <img src=" {{asset('images/logo.png')}}" style="height:60px;position:absolute;top:0;"></img></a>*/
 /*     </div>*/
 /* */
 /*     <!-- Collect the nav links, forms, and other content for toggling -->*/
@@ -406,7 +411,7 @@ class __TwigTemplate_c1eac89f1c26d40cb068475421644ff21127aa67c946b22e409ce9153e5
 /* 		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}*/
 /* 	  <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i></a></li>*/
 /* 	  {%else%}*/
-/* 	 <li><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in"></i></a></li>*/
+/* 	 <li><a href="{{ path('fos_user_security_login') }}">log in</i></a></li>*/
 /* 	  {%endif%}*/
 /* */
 /* */
@@ -432,7 +437,7 @@ class __TwigTemplate_c1eac89f1c26d40cb068475421644ff21127aa67c946b22e409ce9153e5
 /* 	<div id="footer">*/
 /* 		<div class="container" >*/
 /* 			<div align="right" style="margin-bottom:0px;">*/
-/* 			<a href="{{path('ijvr_platform_contact')}}">Contact</a>&nbsp;*/
+/* 			<a href="{{path('ijvr_platform_contact')}}">Contact</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
 /* 			<a href="{{path('ijvr_platform_about')}}">About us</a>*/
 /* 			</div>*/
 /* 		</div>*/

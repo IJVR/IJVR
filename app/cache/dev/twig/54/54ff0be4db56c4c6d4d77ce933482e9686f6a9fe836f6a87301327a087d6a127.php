@@ -22,33 +22,33 @@ class __TwigTemplate_49f390f5c9f1ea9bc79444d4191f5eeb970fde65773482da26d3e8dfab0
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_8a58baecb9c2f0ececf7cdba3f316050c7f4b04722018e16786343ff4032fd53 = $this->env->getExtension("native_profiler");
-        $__internal_8a58baecb9c2f0ececf7cdba3f316050c7f4b04722018e16786343ff4032fd53->enter($__internal_8a58baecb9c2f0ececf7cdba3f316050c7f4b04722018e16786343ff4032fd53_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "IJVRSearchBundle:Default:singleArticle.html.twig"));
+        $__internal_d1f124891f3403073599950393b952f3a2cb94e0bae596a472ecc37657861af5 = $this->env->getExtension("native_profiler");
+        $__internal_d1f124891f3403073599950393b952f3a2cb94e0bae596a472ecc37657861af5->enter($__internal_d1f124891f3403073599950393b952f3a2cb94e0bae596a472ecc37657861af5_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "IJVRSearchBundle:Default:singleArticle.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_8a58baecb9c2f0ececf7cdba3f316050c7f4b04722018e16786343ff4032fd53->leave($__internal_8a58baecb9c2f0ececf7cdba3f316050c7f4b04722018e16786343ff4032fd53_prof);
+        $__internal_d1f124891f3403073599950393b952f3a2cb94e0bae596a472ecc37657861af5->leave($__internal_d1f124891f3403073599950393b952f3a2cb94e0bae596a472ecc37657861af5_prof);
 
     }
 
     // line 3
     public function block_title($context, array $blocks = array())
     {
-        $__internal_9c85a8f71597d516752749f904a383f0f8b2efb2175fb0cb514eb5864d249827 = $this->env->getExtension("native_profiler");
-        $__internal_9c85a8f71597d516752749f904a383f0f8b2efb2175fb0cb514eb5864d249827->enter($__internal_9c85a8f71597d516752749f904a383f0f8b2efb2175fb0cb514eb5864d249827_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
+        $__internal_95a6edfb6f1ecd567c952e621e98ddddde5a4bda203433777f8a2fa20cfb438e = $this->env->getExtension("native_profiler");
+        $__internal_95a6edfb6f1ecd567c952e621e98ddddde5a4bda203433777f8a2fa20cfb438e->enter($__internal_95a6edfb6f1ecd567c952e621e98ddddde5a4bda203433777f8a2fa20cfb438e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
 
         $this->displayParentBlock("title", $context, $blocks);
         echo " - Index";
         
-        $__internal_9c85a8f71597d516752749f904a383f0f8b2efb2175fb0cb514eb5864d249827->leave($__internal_9c85a8f71597d516752749f904a383f0f8b2efb2175fb0cb514eb5864d249827_prof);
+        $__internal_95a6edfb6f1ecd567c952e621e98ddddde5a4bda203433777f8a2fa20cfb438e->leave($__internal_95a6edfb6f1ecd567c952e621e98ddddde5a4bda203433777f8a2fa20cfb438e_prof);
 
     }
 
     // line 5
     public function block_body($context, array $blocks = array())
     {
-        $__internal_8e482eb0c644c792864b209e7214152f35b69c2cda5410e9d072352b72235e87 = $this->env->getExtension("native_profiler");
-        $__internal_8e482eb0c644c792864b209e7214152f35b69c2cda5410e9d072352b72235e87->enter($__internal_8e482eb0c644c792864b209e7214152f35b69c2cda5410e9d072352b72235e87_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_5a4b32c6c48be76dc23db3df949fa46656474e15684e141142a2ce063b9fd86c = $this->env->getExtension("native_profiler");
+        $__internal_5a4b32c6c48be76dc23db3df949fa46656474e15684e141142a2ce063b9fd86c->enter($__internal_5a4b32c6c48be76dc23db3df949fa46656474e15684e141142a2ce063b9fd86c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
         // line 6
         echo "
@@ -92,7 +92,10 @@ class __TwigTemplate_49f390f5c9f1ea9bc79444d4191f5eeb970fde65773482da26d3e8dfab0
 \t\t<div class=\"col-md-6\">
 \t\t\t<div class=\"row\">
 \t\t\t\t<div class=\"col-md-2\">
-\t\t\t\t\t<img alt=\"Bootstrap Image Preview\" src=\"http://lorempixel.com/140/140/\" class=\"img-thumbnail\" />
+\t\t\t\t\t<img alt=\"Bootstrap Image Preview\" src=\"";
+        // line 47
+        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("/images/logo.png"), "html", null, true);
+        echo "\" height='100px' class=\"img-thumbnail\"/>
 \t\t\t\t</div>
 \t\t\t\t<div class=\"col-md-6\">
 \t\t\t\t\t<h2>
@@ -101,15 +104,64 @@ class __TwigTemplate_49f390f5c9f1ea9bc79444d4191f5eeb970fde65773482da26d3e8dfab0
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["article"]) ? $context["article"] : $this->getContext($context, "article")), "title", array()), "html", null, true);
         echo "
 \t\t\t\t\t</h2>
+\t\t\t\t\t
+\t\t\t\t\t";
+        // line 54
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["article"]) ? $context["article"] : $this->getContext($context, "article")), "authors", array()));
+        $context['loop'] = array(
+          'parent' => $context['_parent'],
+          'index0' => 0,
+          'index'  => 1,
+          'first'  => true,
+        );
+        if (is_array($context['_seq']) || (is_object($context['_seq']) && $context['_seq'] instanceof Countable)) {
+            $length = count($context['_seq']);
+            $context['loop']['revindex0'] = $length - 1;
+            $context['loop']['revindex'] = $length;
+            $context['loop']['length'] = $length;
+            $context['loop']['last'] = 1 === $length;
+        }
+        foreach ($context['_seq'] as $context["_key"] => $context["a"]) {
+            // line 55
+            echo "\t\t\t\t\t\t\t\t\t\t";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["a"], "name", array()), "html", null, true);
+            echo " 
+\t\t\t\t\t\t\t\t\t\t";
+            // line 56
+            if ($this->getAttribute($context["loop"], "last", array())) {
+                // line 57
+                echo "\t\t\t\t\t\t\t\t\t\t";
+            } else {
+                // line 58
+                echo "\t\t\t\t\t\t\t\t\t\t,  
+\t\t\t\t\t\t\t\t\t\t";
+            }
+            // line 60
+            echo "\t\t\t\t\t\t\t\t\t";
+            ++$context['loop']['index0'];
+            ++$context['loop']['index'];
+            $context['loop']['first'] = false;
+            if (isset($context['loop']['length'])) {
+                --$context['loop']['revindex0'];
+                --$context['loop']['revindex'];
+                $context['loop']['last'] = 0 === $context['loop']['revindex0'];
+            }
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['a'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 61
+        echo "\t\t\t\t\t<br>
 \t\t\t\t\t <a href=\"";
-        // line 53
+        // line 62
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("ijvr_issue_content", array("id" => $this->getAttribute((isset($context["article"]) ? $context["article"] : $this->getContext($context, "article")), "id", array()))), "html", null, true);
         echo "\" class=\"btn\" type=\"button\">I";
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["article"]) ? $context["article"] : $this->getContext($context, "article")), "issue", array()), "title", array()), "html", null, true);
         echo "</a>
 \t\t\t\t\t<p>
 \t\t\t\t\tVolume ";
-        // line 55
+        // line 64
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute((isset($context["article"]) ? $context["article"] : $this->getContext($context, "article")), "issue", array()), "volume", array()), "id", array()), "html", null, true);
         echo " , ";
         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute((isset($context["article"]) ? $context["article"] : $this->getContext($context, "article")), "date", array()), "m/Y"), "html", null, true);
@@ -131,10 +183,10 @@ class __TwigTemplate_49f390f5c9f1ea9bc79444d4191f5eeb970fde65773482da26d3e8dfab0
 \t\t\t\t\t<h3 class=\"text-muted\">
 \t\t\t\t\t\tAbstract
 \t\t\t\t\t</h3>
-\t\t\t\t\t<p class=\"lead\">
+\t\t\t\t\t<p >
 \t\t\t\t\t\t
 \t\t\t";
-        // line 73
+        // line 82
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["article"]) ? $context["article"] : $this->getContext($context, "article")), "abstract", array()), "html", null, true);
         echo "\t</p>
 \t\t\t\t</div>
@@ -146,7 +198,7 @@ class __TwigTemplate_49f390f5c9f1ea9bc79444d4191f5eeb970fde65773482da26d3e8dfab0
 \t\t\t\t\t</h3>
 \t\t\t\t\t<p>\t\t\t\t
 \t";
-        // line 82
+        // line 91
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["article"]) ? $context["article"] : $this->getContext($context, "article")), "keywords", array()));
         foreach ($context['_seq'] as $context["_key"] => $context["keyword"]) {
@@ -165,9 +217,11 @@ class __TwigTemplate_49f390f5c9f1ea9bc79444d4191f5eeb970fde65773482da26d3e8dfab0
 \t\t<div class=\"col-md-3\">
 \t\t\t 
 \t\t\t <a href=\"";
-        // line 89
+        // line 98
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl($this->getAttribute($this->getAttribute((isset($context["article"]) ? $context["article"] : $this->getContext($context, "article")), "pdf", array()), "webpath", array())), "html", null, true);
-        echo "\"><h3>Download PDF</h3></a>
+        echo "\" target=\"__blank\"><h3><img src=\"";
+        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("/images/pdf.png"), "html", null, true);
+        echo "\" height=\"50px\"></img> Download PDF</h3></a>
 \t\t\t<div class=\"row\">
 \t\t\t\t<div class=\"col-md-12\">
 \t\t\t\t\t<h2>
@@ -175,10 +229,10 @@ class __TwigTemplate_49f390f5c9f1ea9bc79444d4191f5eeb970fde65773482da26d3e8dfab0
 \t\t\t\t\t</h2>
 \t\t\t\t\t<p>
 \t\t\t\t\t\t</p>
-<p>Source Normalized Impact per Paper (SNIP): 1.042</p>
-<p>SCImago Journal Rank (SJR): 0.489</p>
-<p>Impact Factor: 0.831</p>
-<p>5-Year Impact Factor: 1.311\t</p>\t\t
+<p>Source Normalized Impact per Paper (SNIP): </p>
+<p>SCImago Journal Rank (SJR): </p>
+<p>Impact Factor: </p>
+<p>5-Year Impact Factor: \t</p>\t\t
 \t\t\t\t\t
 \t\t\t\t</div>
 \t\t\t</div>
@@ -187,7 +241,7 @@ class __TwigTemplate_49f390f5c9f1ea9bc79444d4191f5eeb970fde65773482da26d3e8dfab0
 </div>
 ";
         
-        $__internal_8e482eb0c644c792864b209e7214152f35b69c2cda5410e9d072352b72235e87->leave($__internal_8e482eb0c644c792864b209e7214152f35b69c2cda5410e9d072352b72235e87_prof);
+        $__internal_5a4b32c6c48be76dc23db3df949fa46656474e15684e141142a2ce063b9fd86c->leave($__internal_5a4b32c6c48be76dc23db3df949fa46656474e15684e141142a2ce063b9fd86c_prof);
 
     }
 
@@ -203,7 +257,7 @@ class __TwigTemplate_49f390f5c9f1ea9bc79444d4191f5eeb970fde65773482da26d3e8dfab0
 
     public function getDebugInfo()
     {
-        return array (  169 => 89,  150 => 82,  138 => 73,  113 => 55,  106 => 53,  101 => 51,  54 => 6,  48 => 5,  35 => 3,  11 => 1,);
+        return array (  221 => 98,  202 => 91,  190 => 82,  165 => 64,  158 => 62,  155 => 61,  141 => 60,  137 => 58,  134 => 57,  132 => 56,  127 => 55,  110 => 54,  104 => 51,  97 => 47,  54 => 6,  48 => 5,  35 => 3,  11 => 1,);
     }
 }
 /* {% extends "::layout.html.twig" %}*/
@@ -252,12 +306,21 @@ class __TwigTemplate_49f390f5c9f1ea9bc79444d4191f5eeb970fde65773482da26d3e8dfab0
 /* 		<div class="col-md-6">*/
 /* 			<div class="row">*/
 /* 				<div class="col-md-2">*/
-/* 					<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" class="img-thumbnail" />*/
+/* 					<img alt="Bootstrap Image Preview" src="{{asset('/images/logo.png')}}" height='100px' class="img-thumbnail"/>*/
 /* 				</div>*/
 /* 				<div class="col-md-6">*/
 /* 					<h2>*/
 /* 					{{article.title}}*/
 /* 					</h2>*/
+/* 					*/
+/* 					{% for a in article.authors %}*/
+/* 										{{a.name}} */
+/* 										{%if loop.last%}*/
+/* 										{%else%}*/
+/* 										,  */
+/* 										{%endif%}*/
+/* 									{%endfor%}*/
+/* 					<br>*/
 /* 					 <a href="{{path('ijvr_issue_content',{'id':article.id})}}" class="btn" type="button">I{{article.issue.title}}</a>*/
 /* 					<p>*/
 /* 					Volume {{article.issue.volume.id}} , {{article.date |date("m/Y")}}, Pages : {{article.pages}}*/
@@ -276,7 +339,7 @@ class __TwigTemplate_49f390f5c9f1ea9bc79444d4191f5eeb970fde65773482da26d3e8dfab0
 /* 					<h3 class="text-muted">*/
 /* 						Abstract*/
 /* 					</h3>*/
-/* 					<p class="lead">*/
+/* 					<p >*/
 /* 						*/
 /* 			{{article.abstract}}	</p>*/
 /* 				</div>*/
@@ -294,7 +357,7 @@ class __TwigTemplate_49f390f5c9f1ea9bc79444d4191f5eeb970fde65773482da26d3e8dfab0
 /* 		</div>*/
 /* 		<div class="col-md-3">*/
 /* 			 */
-/* 			 <a href="{{asset(article.pdf.webpath)}}"><h3>Download PDF</h3></a>*/
+/* 			 <a href="{{asset(article.pdf.webpath)}}" target="__blank"><h3><img src="{{asset('/images/pdf.png')}}" height="50px"></img> Download PDF</h3></a>*/
 /* 			<div class="row">*/
 /* 				<div class="col-md-12">*/
 /* 					<h2>*/
@@ -302,10 +365,10 @@ class __TwigTemplate_49f390f5c9f1ea9bc79444d4191f5eeb970fde65773482da26d3e8dfab0
 /* 					</h2>*/
 /* 					<p>*/
 /* 						</p>*/
-/* <p>Source Normalized Impact per Paper (SNIP): 1.042</p>*/
-/* <p>SCImago Journal Rank (SJR): 0.489</p>*/
-/* <p>Impact Factor: 0.831</p>*/
-/* <p>5-Year Impact Factor: 1.311	</p>		*/
+/* <p>Source Normalized Impact per Paper (SNIP): </p>*/
+/* <p>SCImago Journal Rank (SJR): </p>*/
+/* <p>Impact Factor: </p>*/
+/* <p>5-Year Impact Factor: 	</p>		*/
 /* 					*/
 /* 				</div>*/
 /* 			</div>*/

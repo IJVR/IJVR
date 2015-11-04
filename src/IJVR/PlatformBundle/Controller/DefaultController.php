@@ -4,6 +4,8 @@ namespace IJVR\PlatformBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use IJVR\PublishBundle\Entity\Issue;
+use IJVR\PublishBundle\Entity\Article;
 
 /* IJVR Platform Bundle Controller */
 
@@ -20,8 +22,28 @@ class DefaultController extends Controller
 	//home action leads to home page 
 	public function homeAction()
     	{
-		        
-		return $this->render('IJVRPlatformBundle:Default:home.html.twig');
+
+		$repository = $this->getDoctrine()
+						->getManager()
+						->getRepository('IJVRPublishBundle:Issue')
+						;
+						
+		$issue=$repository->findAll();   
+
+		$last_issue=null;
+		foreach($issue as $i){
+		$last_issue=$i;
+		}
+
+		$repository = $this->getDoctrine()
+						->getManager()
+						->getRepository('IJVRPublishBundle:Article')
+						;
+						
+		$article=$repository->findByIssue($last_issue);
+
+		return $this->render('IJVRPlatformBundle:Default:home.html.twig', array(
+	      'issue' => $last_issue, 'article' => $article));
    	}
 
 

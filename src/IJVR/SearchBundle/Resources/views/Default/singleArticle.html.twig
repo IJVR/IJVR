@@ -44,12 +44,21 @@
 		<div class="col-md-6">
 			<div class="row">
 				<div class="col-md-2">
-					<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" class="img-thumbnail" />
+					<img alt="Bootstrap Image Preview" src="{{asset('/images/logo.png')}}" height='100px' class="img-thumbnail"/>
 				</div>
 				<div class="col-md-6">
 					<h2>
 					{{article.title}}
 					</h2>
+					
+					{% for a in article.authors %}
+										{{a.name}} 
+										{%if loop.last%}
+										{%else%}
+										,  
+										{%endif%}
+									{%endfor%}
+					<br>
 					 <a href="{{path('ijvr_issue_content',{'id':article.id})}}" class="btn" type="button">I{{article.issue.title}}</a>
 					<p>
 					Volume {{article.issue.volume.id}} , {{article.date |date("m/Y")}}, Pages : {{article.pages}}
@@ -68,7 +77,7 @@
 					<h3 class="text-muted">
 						Abstract
 					</h3>
-					<p class="lead">
+					<p >
 						
 			{{article.abstract}}	</p>
 				</div>
@@ -86,7 +95,7 @@
 		</div>
 		<div class="col-md-3">
 			 
-			 <a href="{{asset(article.pdf.webpath)}}"><h3>Download PDF</h3></a>
+			 <a href="{{asset(article.pdf.webpath)}}" target="__blank"><h3><img src="{{asset('/images/pdf.png')}}" height="50px"></img> Download PDF</h3></a>
 			<div class="row">
 				<div class="col-md-12">
 					<h2>
@@ -94,10 +103,10 @@
 					</h2>
 					<p>
 						</p>
-<p>Source Normalized Impact per Paper (SNIP): 1.042</p>
-<p>SCImago Journal Rank (SJR): 0.489</p>
-<p>Impact Factor: 0.831</p>
-<p>5-Year Impact Factor: 1.311	</p>		
+<p>Source Normalized Impact per Paper (SNIP): </p>
+<p>SCImago Journal Rank (SJR): </p>
+<p>Impact Factor: </p>
+<p>5-Year Impact Factor: 	</p>		
 					
 				</div>
 			</div>

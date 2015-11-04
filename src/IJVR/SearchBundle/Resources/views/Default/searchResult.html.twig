@@ -30,45 +30,40 @@
 							<label for="exampleInputEmail1">
 								Year
 							</label><br>
-							{% for article in articles %}
-							<input class="date" type="checkbox" value="{{article.date |date("Y")}}" /> {{article.date |date("Y")}}<br>
+							{% for date in dates %}
+							<input class="date" type="checkbox" value="{{date}}" /> {{date}}<br>
 							{% endfor %}
 						</div>
-						
-						
-						<div class="form-group" id="checkboxTitle">
+
+						<div class="form-group" id="checkboxIssue">
 							 
-							<label for="exampleInputPassword1">
-								Issue Title
+							<label for="exampleInputEmail1">
+								Year
 							</label><br>
-							{% for article in articles %}
-							<input class="issueTitle" type="checkbox" value="{{article.issue.title}}"/> {{article.issue.title}}<br>
+							{% for issue in issues %}
+							<input class="issueTitle" type="checkbox" value="{{issue}}" /> {{issue}}<br>
 							{% endfor %}
 						</div>
-						
-						
-						<div class="form-group" id="checkboxkeywords">
+
+						<div class="form-group" id="checkboxKeywords">
 							 
-							<label for="exampleInputFile">
-								Topic
+							<label for="exampleInputEmail1">
+								keywords
 							</label><br>
-							{% for article in articles %}
-								{% for keyword in article.keywords %}
-							<input class="keywords" type="checkbox" value="{{keyword.keyword}}"/> {{keyword.keyword}}<br>
-								{% endfor %}
+							{% for keyword in keywords %}
+							<input class="keywords" type="checkbox" value="{{keyword}}" /> {{keyword}}<br>
 							{% endfor %}
 						</div>
+
 						
 						<div class="form-group" id="checkboxauthors">
 							 
 							<label for="exampleInputFile">
 								Authors
 							</label><br>
-							{% for article in articles %}
-								{% for author in article.authors %}
-							<input class="authors" type="checkbox" value="{{author.name}}"/> {{author.name}}<br>
+								{% for author in authors %}
+							<input class="authors" type="checkbox" value="{{author}}"/> {{author}}<br>
 								{% endfor %}
-							{% endfor %}
 						</div>
 						
 					
@@ -88,10 +83,10 @@
 										{{article.issue.title}}
 									</h3>
 									<p>
-										Volume {{article.issue.volume.id}}, Issue {{article.issue.id}} , {{article.issue.volume.year}}, Pages: 2530–2554, 
+										Volume {{article.issue.volume.year}}
 									</p>
 									<p>
-										Article first published online : {{article.date |date("m/d/Y")}}, DOI: 10.1111/j.1467-8659.2010.01822.x<a href="{{article.pdf.url}}"> &nbsp; Download PDF</a>
+										Article first published online : {{article.date |date("m/d/Y")}} <a href="{{asset(article.pdf.webpath)}}" target="__blank"><img src="{{asset('/images/pdf.png')}}" height="30px"></img>  Download PDF</a>
 									</p>
 								</dt>
 							</dl>
@@ -101,11 +96,15 @@
 					<ul class="pagination">
 						
 						<li>
-							<a href="#prev">Prev</a>
+							<a href="#">Prev</a>
 						</li>
-					
+						{% for article in articles %} 
 						<li>
-							<a href="#next">Next</a>
+							<a href="#"> {{ loop.index }} </a>
+						</li>
+						{% endfor %}
+						<li>
+							<a href="#">Next</a>
 						</li>
 					</ul>
 				</div>
@@ -145,7 +144,7 @@ console.log(datao)
 
 
 
-
+{%set base=asset('')%}
  $.ajax({
          url: "criteria_search",          
          type: 'POST', //I want a type as POST
@@ -190,10 +189,10 @@ var uniqueDates= $.unique(articles.map(function (d) {
 		 $("#AppendToRow").append("<\/div> <\/div> <div class=\"col-md-6\" id=\"AppendToCol6\" > <div class=\"row\">")
 		  $.each(articles, function(index,jsonObject){
 	   
-        $("#AppendToCol6").append("<p> <\/p> \r\n\r\n <div class=\"col-md-12\"  id=\"AppendToCol12\"> <a href=\"singleArticle/"+jsonObject.id+"\"><h3>"+jsonObject.title+"<\/h3><\/a> <dl> <dt> <h3>" +jsonObject.issue.title+" <\/h3> <p> Volume Volume.id, Issue"+ jsonObject.issue.id+ ", article.issue.volume.year, Pages: 2530\u20132554,  <\/p> <p> Article first published online : "+jsonObject.date.date.substring(0,4)+", DOI: 10.1111\/j.1467-8659.2010.01822.x<a href=\"pdfurl\"> &nbsp; Download PDF<\/a> <\/p> <\/dt> <\/dl> <\/div>") 
+        $("#AppendToCol6").append("<p> <\/p> \r\n\r\n <div class=\"col-md-12\"  id=\"AppendToCol12\"> <a href=\"singleArticle/"+jsonObject.id+"\"><h3>"+jsonObject.title+"<\/h3><\/a> <dl> <dt> <h3>" +jsonObject.issue.title+" <\/h3> <p> Volume " +jsonObject.issue.volume.year+"  <\/p> <p> Article first published online : "+jsonObject.date.date.substring(0,4)+"<a href= {{base}}uploads/"+jsonObject.pdf.url+"/"+jsonObject.pdf.id+".pdf target=__blank> <img src={{base}}images/pdf.png height=30px></img>&nbsp; Download PDF<\/a> <\/p> <\/dt> <\/dl> <\/div>") 
          });
 		 
-		  $("#AppendToCol6").append(" <\/div> <ul class=\"pagination\">  <li> <a href=\"#prev\">Prev<\/a> <\/li> <li> <a href=\"#next\">Next<\/a> <\/li> <\/ul> <\/div> <\/div> <\/div>");
+		  $("#AppendToCol6").append(" <\/div> <ul class=\"pagination\">  <li> <a href=\"#\">Prev<\/a> <\/li> <li> <a href=\"#\">1<\/a> <\/li> <li> <a href=\"#\">2<\/a> <\/li> <li> <a href=\"#\">3<\/a> <\/li> <li> <a href=\"#\">4<\/a> <\/li> <li> <a href=\"#\">5<\/a> <\/li> <li> <a href=\"#\">Next<\/a> <\/li> <\/ul> <\/div> <\/div> <\/div>");
 		 
 	/*		
 							

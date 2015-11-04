@@ -15,29 +15,29 @@ use Doctrine\ORM\EntityRepository;
 
 class ArticleRepository extends EntityRepository
 {
-	
+    
     //tested
     public function getAllArticles()
     {
-	$qb = $this->createQueryBuilder('a');
+    $qb = $this->createQueryBuilder('a');
         return $qb->getQuery()
           ->getResult();
     }
 
     public function getArticlesById($id)
     {
-	$qb = $this->createQueryBuilder('a');
-		$qb->where('a.id = (:id)')
-					->setParameters('id',$id);
+    $qb = $this->createQueryBuilder('a');
+        $qb->where('a.id = (:id)')
+                    ->setParameters('id',$id);
 
-    	return $qb->getQuery()
+        return $qb->getQuery()
           ->getResult();
-	}
+    }
 
     public function getArticlesByTitle($title)
      {
-	$query = $this->getEntityManager()
-        	->createQuery(
+    $query = $this->getEntityManager()
+            ->createQuery(
             'SELECT a,i,v,p,k FROM IJVRPublishBundle:Article a
             JOIN a.issue i 
             LEFT JOIN a.keywords k
@@ -49,14 +49,14 @@ class ArticleRepository extends EntityRepository
    
         $result= $query->getResult();
         return $result ;
-	}
+    }
 
    public function getArticlesByCriteria($criteria,$value)
      {
         //author, issuetitle, articletitle, abstract
-    	if($criteria=="date")
-    	{
-    		$year=$value ;
+        if($criteria=="date")
+        {
+            $year=$value ;
             $query = $this->getEntityManager()
                 ->createQuery(
                 'SELECT a,i,v, p, k FROM IJVRPublishBundle:Article a
@@ -67,9 +67,9 @@ class ArticleRepository extends EntityRepository
                 WHERE  a.'.$criteria.' BETWEEN \''.$year.'/01/01\' AND \''.$year.'/12/31\' ');
             $result=$query->getArrayResult();;
             return $result ;
-    	} 
-    	else if($criteria=="issueTitle")
-    	{
+        } 
+        else if($criteria=="issueTitle")
+        {
             $query = $this->getEntityManager()
                 ->createQuery(
                 'SELECT a,i,v, p, k FROM IJVRPublishBundle:Article a
@@ -79,13 +79,13 @@ class ArticleRepository extends EntityRepository
                 LEFT JOIN a.keywords k
                 WHERE  i.title like :value' 
             )->setParameter('value', '%'.$value.'%');
-            $result= $query->getArrayResult();;	
+            $result= $query->getArrayResult();; 
             return $result ;
-    	}
-    	else
-    	{
-    	$query = $this->getEntityManager()
-            	->createQuery(
+        }
+        else
+        {
+        $query = $this->getEntityManager()
+                ->createQuery(
                 'SELECT a,i,v, p, k FROM IJVRPublishBundle:Article a
                 JOIN a.issue i 
                 JOIN i.volume v
@@ -95,13 +95,13 @@ class ArticleRepository extends EntityRepository
             )->setParameter('value', '%'.$value.'%');
             $result= $query->getArrayResult();;
             return $result ;
-    	}
-	}
+        }
+    }
 
    public function getArticlesByIssueId($issue_id)
     {
-	 $query = $this->getEntityManager()
-        	->createQuery(
+     $query = $this->getEntityManager()
+            ->createQuery(
             'SELECT a,i,v,p,k FROM IJVRPublishBundle:Article a
             JOIN a.issue i
             JOIN i.volume v
@@ -113,7 +113,7 @@ class ArticleRepository extends EntityRepository
    
         return $query->getResult();
  
-	}
+    }
 
     public function getIssueIdByArticleId($article_id)
     {
@@ -130,8 +130,8 @@ class ArticleRepository extends EntityRepository
 
    public function getArticlesAndIssuesAndVolumeByArticleId($article_id)
     {
-	 $query = $this->getEntityManager()
-        	->createQuery(
+     $query = $this->getEntityManager()
+            ->createQuery(
             'SELECT a, i , v , p, k FROM IJVRPublishBundle:Article a
             JOIN a.issue i 
             JOIN i.volume v
@@ -145,15 +145,16 @@ class ArticleRepository extends EntityRepository
     } catch (\Doctrine\ORM\NoResultException $e) {
         return null;
     }
-	}
+    }
 
     public function getArticlesByMultipleCriterias( $abstract, $title, $keywords, $issueTitle, $year, $authors)
     {
         
        
-        $queryString='SELECT a, i , v , p, k FROM IJVRPublishBundle:Article a JOIN a.issue i 
+        $queryString='SELECT a, at, i , v , p, k FROM IJVRPublishBundle:Article a JOIN a.issue i 
             JOIN i.volume v
             JOIN a.pdf p
+            JOIN a.authors at
             LEFT JOIN a.keywords k   where' ;
 
         $firstPredicat=true ;
@@ -164,7 +165,7 @@ class ArticleRepository extends EntityRepository
             $queryString.='a.abstract like \'%'.$abstract.'%\' ' ;
             $firstPredicat=false ;
         }
-		$err=trim($title);
+        $err=trim($title);
         if( !empty($err) )
         {
             if(!$firstPredicat)
@@ -175,7 +176,7 @@ class ArticleRepository extends EntityRepository
             $firstPredicat=false ;
         }
 
-		$err=trim($issueTitle);
+        $err=trim($issueTitle);
         if( !empty($err) )
         {
             if(!$firstPredicat)
@@ -185,7 +186,7 @@ class ArticleRepository extends EntityRepository
             $queryString.=' i.title like \'%'.$issueTitle.'%\' ' ;
             $firstPredicat=false ;
         }
-		$err=trim($year);
+        $err=trim($year);
         if( !empty($err) )
         {
             if(!$firstPredicat)
@@ -198,8 +199,8 @@ class ArticleRepository extends EntityRepository
         if(count($keywords) > 0)
         {
         $firstKeyword=$keywords[0];
-		
-		$err=trim($firstKeyword);
+        
+        $err=trim($firstKeyword);
         if(!empty($err))
         {
             if(!$firstPredicat)
@@ -209,7 +210,7 @@ class ArticleRepository extends EntityRepository
             $queryString.=' (k.keyword like \'%'.$firstKeyword.'%\' ' ;
             $firstPredicat=false ;
         foreach ($keywords as $keyword) {
-					$err=trim($keyword);
+                    $err=trim($keyword);
                     if(!empty($err) )
                     {
                         $queryString.=' OR k.keyword like \'%'.$keyword.'%\' ';
@@ -275,16 +276,16 @@ class ArticleRepository extends EntityRepository
 
         $firstPredicat=true ;
 
-		$err=trim($abstract);
+        $err=trim($abstract);
         if( !empty($err) )
         {
            
             $queryString.='a.abstract like \'%'.$abstract.'%\' ' ;
             $firstPredicat=false ;
         }
-		
-		
-		$err=trim($title);
+        
+        
+        $err=trim($title);
         if( !empty($err) )
         {
             if(!$firstPredicat)
@@ -295,7 +296,7 @@ class ArticleRepository extends EntityRepository
             $firstPredicat=false ;
         }
 
-		$err=trim($issueTitle);
+        $err=trim($issueTitle);
         if( !empty($err) )
         {
             if(!$firstPredicat)
@@ -305,8 +306,8 @@ class ArticleRepository extends EntityRepository
             $queryString.=' i.title like \'%'.$issueTitle.'%\' ' ;
             $firstPredicat=false ;
         }
-		
-		$err=trim($year);
+        
+        $err=trim($year);
         if( !empty($year) )
         {
             if(!$firstPredicat)
@@ -319,8 +320,8 @@ class ArticleRepository extends EntityRepository
         if(count($keywords) > 0)
         {
         $firstKeyword=$keywords[0];
-		
-		$err=trim($firstKeyword);
+        
+        $err=trim($firstKeyword);
         if(!empty($err))
         {
             if(!$firstPredicat)
@@ -330,8 +331,8 @@ class ArticleRepository extends EntityRepository
             $queryString.=' (k.keyword like \'%'.$firstKeyword.'%\' ' ;
             $firstPredicat=false ;
         foreach ($keywords as $keyword) {
-			
-					$err=trim($keyword);
+            
+                    $err=trim($keyword);
                     if(!empty($err) )
                     {
                         $queryString.=' OR k.keyword like \'%'.$keyword.'%\' ';
@@ -380,7 +381,7 @@ class ArticleRepository extends EntityRepository
     }    
 
     }
-    	
+        
 }
 
 ?>
