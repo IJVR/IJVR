@@ -45,7 +45,10 @@
 				
 				<div class="">
 					<div class="row">
+
+						<table class="table table-hover table-bordered">
 						{% for article in articles %} 
+						<tr><td>
 						<p> </p>
 		
 
@@ -57,7 +60,10 @@
 
 									
 									{% for a in article.authors %}
+
+									<a href="{{path('ijvr_profile_authors',{'id':a.id})}}" target="__blank">
 										{{a.name}} 
+										</a>
 										{%if loop.last%}
 										{%else%}
 										,  
@@ -74,7 +80,9 @@
 								</dt>
 							</dl>
 						</div>
+						</td>
 						{% endfor %}
+						</table>
 					</div>
 					
 				</div>

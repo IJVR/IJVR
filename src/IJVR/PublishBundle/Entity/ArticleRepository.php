@@ -24,6 +24,35 @@ class ArticleRepository extends EntityRepository
           ->getResult();
     }
 
+    public function findByAuthors($author){
+        $query = $this->createQueryBuilder('a')
+                      ->select('a')
+                      ->leftJoin('a.authors', 'c')
+                      ->addSelect('c');
+ 
+        $query = $query->add('where', $query->expr()->in('c', ':c'))
+                      ->setParameter('c', $author)
+                      ->getQuery()
+                      ->getResult();
+          
+        return $query;
+    }
+
+    public function findByKeywords($key){
+        $query = $this->createQueryBuilder('a')
+                      ->select('a')
+                      ->leftJoin('a.keywords', 'c')
+                      ->addSelect('c');
+ 
+        $query = $query->add('where', $query->expr()->in('c', ':c'))
+                      ->setParameter('c', $key)
+                      ->getQuery()
+                      ->getResult();
+          
+        return $query;
+    }
+
+
     public function getArticlesById($id)
     {
     $qb = $this->createQueryBuilder('a');

@@ -53,22 +53,9 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                 return array (  '_controller' => 'IJVR\\SearchBundle\\Controller\\DefaultController::findArticlesByCriteriaAction',  '_route' => 'ijvr_search_criteria',);
             }
 
-            if (0 === strpos($pathinfo, '/search/advancedsearch')) {
-                // ijvr_go_to_advanced_search
-                if ($pathinfo === '/search/advancedsearchview') {
-                    return array (  '_controller' => 'IJVR\\SearchBundle\\Controller\\DefaultController::advancedSearchViewAction',  '_route' => 'ijvr_go_to_advanced_search',);
-                }
-
-                // ijvr_advanced_search
-                if ($pathinfo === '/search/advancedsearch') {
-                    return array (  '_controller' => 'IJVR\\SearchBundle\\Controller\\DefaultController::advancedSearchAction',  '_route' => 'ijvr_advanced_search',);
-                }
-
-            }
-
-            // ijvr_issue_content
-            if (0 === strpos($pathinfo, '/search/issuecontent') && preg_match('#^/search/issuecontent/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'ijvr_issue_content')), array (  '_controller' => 'IJVR\\SearchBundle\\Controller\\DefaultController::searchForIssueFromAContainingArticleAction',));
+            // ijvr_advanced_search
+            if ($pathinfo === '/search/advanced_search') {
+                return array (  '_controller' => 'IJVR\\SearchBundle\\Controller\\DefaultController::advancedSearchAction',  '_route' => 'ijvr_advanced_search',);
             }
 
         }

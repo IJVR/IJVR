@@ -386,4 +386,37 @@ class Article
     {
         return $this->publish_date;
     }
+
+    /**
+     * Add authors
+     *
+     * @param \IJVR\PublishBundle\Entity\Author $authors
+     * @return Article
+     */
+    public function addAuthor(\IJVR\PublishBundle\Entity\Author $authors)
+    {
+        $this->authors[] = $authors;
+    
+        return $this;
+    }
+
+    /**
+     * Remove authors
+     *
+     * @param \IJVR\PublishBundle\Entity\Author $authors
+     */
+    public function removeAuthor(\IJVR\PublishBundle\Entity\Author $authors)
+    {
+        $this->authors->removeElement($authors);
+    }
+
+    /**
+     * Get authors
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAuthors()
+    {
+        return $this->authors;
+    }
 }

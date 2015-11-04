@@ -1,0 +1,51 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+<br/>
+<br/>
+
+<div class="container">
+
+<h2>
+	{{author.name}}	
+</h2>
+<h4>
+Articles
+</h4>
+
+{% for article in articles %} 
+						<p> </p>
+		
+
+						<div class="col-md-12">
+						
+							 <a href="{{path('ijvr_search_single_article',{'id':article.id})}}"><h3>{{ article.title }}</h3></a>
+							<dl>
+								<dt>
+
+									
+									{% for a in article.authors %}
+										{{a.name}} 
+										{%if loop.last%}
+										{%else%}
+										,  
+										{%endif%}
+									{%endfor%}
+									<br>
+									
+									<p>
+										Volume {{article.issue.volume.year}}, Issue {{article.issue.title}} , Pages: 2530–2554
+									</p>
+									<p>
+										 <a href="{{asset(article.pdf.webpath)}}" ><img src="{{asset('/images/pdf.png')}}" height="30px"></img>Download PDF</a>
+									</p>
+								</dt>
+							</dl>
+						</div>
+						{% endfor %}
+
+</div>
+
+{% endblock %}

@@ -21,20 +21,20 @@ class __TwigTemplate_25a4c8ddc7f018c5229aee8d88d9c0a1b44e41c6356e80c24c1631e7058
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_060c123f3545875f0a5be9c7808c8bdadd96c0d21b3b3f5204ef16a6e398cf5f = $this->env->getExtension("native_profiler");
-        $__internal_060c123f3545875f0a5be9c7808c8bdadd96c0d21b3b3f5204ef16a6e398cf5f->enter($__internal_060c123f3545875f0a5be9c7808c8bdadd96c0d21b3b3f5204ef16a6e398cf5f_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "FOSUserBundle:Security:login.html.twig"));
+        $__internal_b7bf285025434e02b74e52cbea64e6eb02b0d89b49fd155d2f51fa7ad297f245 = $this->env->getExtension("native_profiler");
+        $__internal_b7bf285025434e02b74e52cbea64e6eb02b0d89b49fd155d2f51fa7ad297f245->enter($__internal_b7bf285025434e02b74e52cbea64e6eb02b0d89b49fd155d2f51fa7ad297f245_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "FOSUserBundle:Security:login.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_060c123f3545875f0a5be9c7808c8bdadd96c0d21b3b3f5204ef16a6e398cf5f->leave($__internal_060c123f3545875f0a5be9c7808c8bdadd96c0d21b3b3f5204ef16a6e398cf5f_prof);
+        $__internal_b7bf285025434e02b74e52cbea64e6eb02b0d89b49fd155d2f51fa7ad297f245->leave($__internal_b7bf285025434e02b74e52cbea64e6eb02b0d89b49fd155d2f51fa7ad297f245_prof);
 
     }
 
     // line 5
     public function block_fos_user_content($context, array $blocks = array())
     {
-        $__internal_6f67f8a6734872df3afc95bb67c9dac8b8075574f76fceb28f9828c5359b764c = $this->env->getExtension("native_profiler");
-        $__internal_6f67f8a6734872df3afc95bb67c9dac8b8075574f76fceb28f9828c5359b764c->enter($__internal_6f67f8a6734872df3afc95bb67c9dac8b8075574f76fceb28f9828c5359b764c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "fos_user_content"));
+        $__internal_77756323466ddafd9e3e57341824d9550e447ad51fb174f8bc1b1bbc2679931a = $this->env->getExtension("native_profiler");
+        $__internal_77756323466ddafd9e3e57341824d9550e447ad51fb174f8bc1b1bbc2679931a->enter($__internal_77756323466ddafd9e3e57341824d9550e447ad51fb174f8bc1b1bbc2679931a_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "fos_user_content"));
 
         // line 6
         if ((isset($context["error"]) ? $context["error"] : $this->getContext($context, "error"))) {
@@ -93,10 +93,11 @@ class __TwigTemplate_25a4c8ddc7f018c5229aee8d88d9c0a1b44e41c6356e80c24c1631e7058
         // line 41
         echo twig_escape_filter($this->env, $this->env->getExtension('translator')->trans("security.login.submit", array(), "FOSUserBundle"), "html", null, true);
         echo "\" />
+    <br><br><br>
 \t<a href=\"";
-        // line 42
+        // line 43
         echo $this->env->getExtension('routing')->getPath("fos_user_registration_register");
-        echo "\">registration</a>
+        echo "\">Not registered yet ? Please register now</a>
 </div>
 </form>
 
@@ -104,7 +105,7 @@ class __TwigTemplate_25a4c8ddc7f018c5229aee8d88d9c0a1b44e41c6356e80c24c1631e7058
 
 ";
         
-        $__internal_6f67f8a6734872df3afc95bb67c9dac8b8075574f76fceb28f9828c5359b764c->leave($__internal_6f67f8a6734872df3afc95bb67c9dac8b8075574f76fceb28f9828c5359b764c_prof);
+        $__internal_77756323466ddafd9e3e57341824d9550e447ad51fb174f8bc1b1bbc2679931a->leave($__internal_77756323466ddafd9e3e57341824d9550e447ad51fb174f8bc1b1bbc2679931a_prof);
 
     }
 
@@ -120,7 +121,7 @@ class __TwigTemplate_25a4c8ddc7f018c5229aee8d88d9c0a1b44e41c6356e80c24c1631e7058
 
     public function getDebugInfo()
     {
-        return array (  98 => 42,  94 => 41,  83 => 33,  65 => 18,  57 => 13,  53 => 12,  48 => 9,  42 => 7,  40 => 6,  34 => 5,  11 => 1,);
+        return array (  99 => 43,  94 => 41,  83 => 33,  65 => 18,  57 => 13,  53 => 12,  48 => 9,  42 => 7,  40 => 6,  34 => 5,  11 => 1,);
     }
 }
 /* {% extends "FOSUserBundle::layout.html.twig" %}*/
@@ -164,7 +165,8 @@ class __TwigTemplate_25a4c8ddc7f018c5229aee8d88d9c0a1b44e41c6356e80c24c1631e7058
 /*   <div class="form-group">*/
 /* */
 /*     <input type="submit" id="_submit" name="_submit" class="btn btn-primary" value="{{ 'security.login.submit'|trans }}" />*/
-/* 	<a href="{{path('fos_user_registration_register')}}">registration</a>*/
+/*     <br><br><br>*/
+/* 	<a href="{{path('fos_user_registration_register')}}">Not registered yet ? Please register now</a>*/
 /* </div>*/
 /* </form>*/
 /* */

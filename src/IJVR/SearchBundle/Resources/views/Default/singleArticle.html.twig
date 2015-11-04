@@ -12,34 +12,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-2">
-			<h3 class="text-left">
-				Table of contents
-			</h3>
-			<div class="panel-group" id="panel-835590">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						 <a class="panel-title" data-toggle="collapse" data-parent="#panel-835590" href="#panel-element-704681">Highlights
-
-
-</a>
-					</div>
-					<div id="panel-element-704681" class="panel-collapse collapse in">
-						<div class="panel-body">
-							Anim pariatur cliche...
-						</div>
-					</div>
-				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						 <a class="panel-title" data-toggle="collapse" data-parent="#panel-835590" href="#panel-element-360342">keywords</a>
-					</div>
-					<div id="panel-element-360342" class="panel-collapse collapse">
-						<div class="panel-body">
-							Anim pariatur cliche...
-						</div>
-					</div>
-				</div>
-			</div>
+			
 		</div>
 		<div class="col-md-6">
 			<div class="row">
@@ -52,7 +25,9 @@
 					</h2>
 					
 					{% for a in article.authors %}
+										<a href="{{path('ijvr_profile_authors',{'id':a.id})}}" target="__blank">
 										{{a.name}} 
+										</a>
 										{%if loop.last%}
 										{%else%}
 										,  

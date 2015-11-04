@@ -1,0 +1,38 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+<br/>
+<br/>
+
+<div class="container">
+
+<h2>
+	All Issues
+</h2>
+
+
+{% for issue in issues %} 
+						<p> </p>
+		
+						
+						
+					
+						<div class="col-md-6">
+								
+							 <a href="{{path('ijvr_issue_content',{'id':articles_id[loop.index0].id})}}"><h3>{{ issue.title }}</h3></a>
+							<dl>
+								<dt>									
+									<p>
+										Volume {{issue.volume.year}} , Published on: {{articles_id[loop.index0].publishDate | date('m/d/Y')}}
+									</p>									
+								</dt>
+							</dl>
+						</div>
+						
+						{% endfor %}
+
+</div>
+
+{% endblock %}

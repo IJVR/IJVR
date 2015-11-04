@@ -171,6 +171,16 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'ijvr_issue_content')), array (  '_controller' => 'IJVR\\SearchBundle\\Controller\\DefaultController::searchForIssueFromAContainingArticleAction',));
             }
 
+            // ijvr_profile_authors
+            if (0 === strpos($pathinfo, '/search/profile') && preg_match('#^/search/profile/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'ijvr_profile_authors')), array (  '_controller' => 'IJVR\\SearchBundle\\Controller\\DefaultController::profileAuthorsAction',));
+            }
+
+            // ijvr_all_issues
+            if ($pathinfo === '/search/issue/all') {
+                return array (  '_controller' => 'IJVR\\SearchBundle\\Controller\\DefaultController::AllIssuesAction',  '_route' => 'ijvr_all_issues',);
+            }
+
         }
 
         if (0 === strpos($pathinfo, '/publish')) {

@@ -133,6 +133,7 @@
   'IJVRSearchBundle:Default:index.html.twig' => 'C:\\wamp\\www\\IJVR\\src\\IJVR\\SearchBundle/Resources/views/Default/index.html.twig',
   'IJVRSearchBundle:Default:index.html.twig~' => 'C:\\wamp\\www\\IJVR\\src\\IJVR\\SearchBundle/Resources/views/Default/index.html.twig~',
   'IJVRSearchBundle:Default:issueArticles.html.twig' => 'C:\\wamp\\www\\IJVR\\src\\IJVR\\SearchBundle/Resources/views/Default/issueArticles.html.twig',
+  'IJVRSearchBundle:Default:profile.html.twig' => 'C:\\wamp\\www\\IJVR\\src\\IJVR\\SearchBundle/Resources/views/Default/profile.html.twig',
   'IJVRSearchBundle:Default:searchResult.html.twig' => 'C:\\wamp\\www\\IJVR\\src\\IJVR\\SearchBundle/Resources/views/Default/searchResult.html.twig',
   'IJVRSearchBundle:Default:searchResult.html.twig~' => 'C:\\wamp\\www\\IJVR\\src\\IJVR\\SearchBundle/Resources/views/Default/searchResult.html.twig~',
   'IJVRSearchBundle:Default:singleArticle.html.twig' => 'C:\\wamp\\www\\IJVR\\src\\IJVR\\SearchBundle/Resources/views/Default/singleArticle.html.twig',

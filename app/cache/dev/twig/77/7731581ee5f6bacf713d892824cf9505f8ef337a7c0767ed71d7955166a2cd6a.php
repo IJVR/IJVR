@@ -17,8 +17,8 @@ class __TwigTemplate_c1eac89f1c26d40cb068475421644ff21127aa67c946b22e409ce9153e5
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_d11b3390e32bc8dec2d0998280da3b963a685d8ebb7d3183616d4c6ab32d58f5 = $this->env->getExtension("native_profiler");
-        $__internal_d11b3390e32bc8dec2d0998280da3b963a685d8ebb7d3183616d4c6ab32d58f5->enter($__internal_d11b3390e32bc8dec2d0998280da3b963a685d8ebb7d3183616d4c6ab32d58f5_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "::layout.html.twig"));
+        $__internal_d5427761449d803e622cfa736a6e2e55c94176c5147b2f19466848ab1329fc22 = $this->env->getExtension("native_profiler");
+        $__internal_d5427761449d803e622cfa736a6e2e55c94176c5147b2f19466848ab1329fc22->enter($__internal_d5427761449d803e622cfa736a6e2e55c94176c5147b2f19466848ab1329fc22_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "::layout.html.twig"));
 
         // line 1
         echo "<!DOCTYPE HTML>
@@ -148,7 +148,7 @@ class __TwigTemplate_c1eac89f1c26d40cb068475421644ff21127aa67c946b22e409ce9153e5
         echo $this->env->getExtension('routing')->getPath("ijvr_minimal_search");
         echo "\" role=\"search\">
         <div class=\"form-group\">
-          <input type=\"text\" class=\"form-control\" name=\"search_field\" placeholder=\"Search\">
+          <input type=\"text\" class=\"form-control\" name=\"search_field\" placeholder=\"Quick Search\">
         </div>
         <button type=\"submit\" class=\"btn btn-default\"><i class=\"fa fa-search\"></i></button>
 \t\t
@@ -220,12 +220,26 @@ class __TwigTemplate_c1eac89f1c26d40cb068475421644ff21127aa67c946b22e409ce9153e5
         // line 134
         echo $this->env->getExtension('routing')->getPath("fos_user_profile_show");
         echo "'\" >
-<i class=\"fa fa-user\"></i> Profile </button></center>
+";
+        // line 135
+        if ($this->env->getExtension('security')->isGranted("IS_AUTHENTICATED_REMEMBERED")) {
+            // line 136
+            echo "<i class=\"fa fa-user\"></i> 
+Profile
+";
+        } else {
+            // line 139
+            echo "<i class=\"fa fa-sign-in\"></i>
+Log in
+";
+        }
+        // line 142
+        echo " </button></center>
 </div>
     ";
-        // line 137
+        // line 144
         $this->displayBlock('body', $context, $blocks);
-        // line 139
+        // line 146
         echo "\t
 \t<div id=\"push\"></div>
 </div>
@@ -233,11 +247,11 @@ class __TwigTemplate_c1eac89f1c26d40cb068475421644ff21127aa67c946b22e409ce9153e5
 \t\t<div class=\"container\" >
 \t\t\t<div align=\"right\" style=\"margin-bottom:0px;\">
 \t\t\t<a href=\"";
-        // line 145
+        // line 152
         echo $this->env->getExtension('routing')->getPath("ijvr_platform_contact");
         echo "\">Contact</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 \t\t\t<a href=\"";
-        // line 146
+        // line 153
         echo $this->env->getExtension('routing')->getPath("ijvr_platform_about");
         echo "\">About us</a>
 \t\t\t</div>
@@ -249,32 +263,32 @@ class __TwigTemplate_c1eac89f1c26d40cb068475421644ff21127aa67c946b22e409ce9153e5
 </html>
 ";
         
-        $__internal_d11b3390e32bc8dec2d0998280da3b963a685d8ebb7d3183616d4c6ab32d58f5->leave($__internal_d11b3390e32bc8dec2d0998280da3b963a685d8ebb7d3183616d4c6ab32d58f5_prof);
+        $__internal_d5427761449d803e622cfa736a6e2e55c94176c5147b2f19466848ab1329fc22->leave($__internal_d5427761449d803e622cfa736a6e2e55c94176c5147b2f19466848ab1329fc22_prof);
 
     }
 
     // line 6
     public function block_title($context, array $blocks = array())
     {
-        $__internal_9c03a93a97c59e24beb385fb49454009f8f708756f871d3a487c02d5a752fabc = $this->env->getExtension("native_profiler");
-        $__internal_9c03a93a97c59e24beb385fb49454009f8f708756f871d3a487c02d5a752fabc->enter($__internal_9c03a93a97c59e24beb385fb49454009f8f708756f871d3a487c02d5a752fabc_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
+        $__internal_c8cefa866b39d5cdf0964ce46414cbb85f0700aa609713419d40c553a4034093 = $this->env->getExtension("native_profiler");
+        $__internal_c8cefa866b39d5cdf0964ce46414cbb85f0700aa609713419d40c553a4034093->enter($__internal_c8cefa866b39d5cdf0964ce46414cbb85f0700aa609713419d40c553a4034093_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
 
         echo "IJVR";
         
-        $__internal_9c03a93a97c59e24beb385fb49454009f8f708756f871d3a487c02d5a752fabc->leave($__internal_9c03a93a97c59e24beb385fb49454009f8f708756f871d3a487c02d5a752fabc_prof);
+        $__internal_c8cefa866b39d5cdf0964ce46414cbb85f0700aa609713419d40c553a4034093->leave($__internal_c8cefa866b39d5cdf0964ce46414cbb85f0700aa609713419d40c553a4034093_prof);
 
     }
 
-    // line 137
+    // line 144
     public function block_body($context, array $blocks = array())
     {
-        $__internal_8dd0a5d545d049655c10c1a3ab78445b68266dbe4ab5930227cce87f5c5e9a64 = $this->env->getExtension("native_profiler");
-        $__internal_8dd0a5d545d049655c10c1a3ab78445b68266dbe4ab5930227cce87f5c5e9a64->enter($__internal_8dd0a5d545d049655c10c1a3ab78445b68266dbe4ab5930227cce87f5c5e9a64_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_909dd1f9db14cb1eff463d25486ff4cbe5b681c0180dc932baad82fc6ecf4d16 = $this->env->getExtension("native_profiler");
+        $__internal_909dd1f9db14cb1eff463d25486ff4cbe5b681c0180dc932baad82fc6ecf4d16->enter($__internal_909dd1f9db14cb1eff463d25486ff4cbe5b681c0180dc932baad82fc6ecf4d16_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
-        // line 138
+        // line 145
         echo "    ";
         
-        $__internal_8dd0a5d545d049655c10c1a3ab78445b68266dbe4ab5930227cce87f5c5e9a64->leave($__internal_8dd0a5d545d049655c10c1a3ab78445b68266dbe4ab5930227cce87f5c5e9a64_prof);
+        $__internal_909dd1f9db14cb1eff463d25486ff4cbe5b681c0180dc932baad82fc6ecf4d16->leave($__internal_909dd1f9db14cb1eff463d25486ff4cbe5b681c0180dc932baad82fc6ecf4d16_prof);
 
     }
 
@@ -290,7 +304,7 @@ class __TwigTemplate_c1eac89f1c26d40cb068475421644ff21127aa67c946b22e409ce9153e5
 
     public function getDebugInfo()
     {
-        return array (  275 => 138,  269 => 137,  257 => 6,  241 => 146,  237 => 145,  229 => 139,  227 => 137,  221 => 134,  216 => 132,  210 => 129,  200 => 121,  194 => 119,  188 => 117,  186 => 116,  180 => 114,  175 => 112,  171 => 111,  167 => 110,  162 => 109,  160 => 108,  148 => 99,  137 => 91,  133 => 90,  56 => 16,  52 => 15,  47 => 13,  42 => 11,  35 => 7,  31 => 6,  24 => 1,);
+        return array (  289 => 145,  283 => 144,  271 => 6,  255 => 153,  251 => 152,  243 => 146,  241 => 144,  237 => 142,  232 => 139,  227 => 136,  225 => 135,  221 => 134,  216 => 132,  210 => 129,  200 => 121,  194 => 119,  188 => 117,  186 => 116,  180 => 114,  175 => 112,  171 => 111,  167 => 110,  162 => 109,  160 => 108,  148 => 99,  137 => 91,  133 => 90,  56 => 16,  52 => 15,  47 => 13,  42 => 11,  35 => 7,  31 => 6,  24 => 1,);
     }
 }
 /* <!DOCTYPE HTML>*/
@@ -393,7 +407,7 @@ class __TwigTemplate_c1eac89f1c26d40cb068475421644ff21127aa67c946b22e409ce9153e5
 /*       <ul class="nav navbar-nav navbar-right">*/
 /* 	  <form class="navbar-form navbar-left" method="POST" action="{{path('ijvr_minimal_search')}}" role="search">*/
 /*         <div class="form-group">*/
-/*           <input type="text" class="form-control" name="search_field" placeholder="Search">*/
+/*           <input type="text" class="form-control" name="search_field" placeholder="Quick Search">*/
 /*         </div>*/
 /*         <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>*/
 /* 		*/
@@ -427,7 +441,14 @@ class __TwigTemplate_c1eac89f1c26d40cb068475421644ff21127aa67c946b22e409ce9153e5
 /* <button type="button" class="btn btn-primary btn-lg btn-space"  onClick="location.href='{{path('ijvr_publish_index')}}'"><i class="fa fa-pencil"></i> Publish </button>*/
 /*   */
 /* <button type="button" style="float:right;" class="btn btn-primary btn-lg btn-space" onClick="location.href='{{path('fos_user_profile_show')}}'" >*/
-/* <i class="fa fa-user"></i> Profile </button></center>*/
+/* {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}*/
+/* <i class="fa fa-user"></i> */
+/* Profile*/
+/* {%else%}*/
+/* <i class="fa fa-sign-in"></i>*/
+/* Log in*/
+/* {%endif%}*/
+/*  </button></center>*/
 /* </div>*/
 /*     {% block body %}*/
 /*     {% endblock %}*/

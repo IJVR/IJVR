@@ -8,7 +8,6 @@ ijvr_minimal_search:
 ijvr_search_single_article:
     path:     /singleArticle/{id}
     defaults: { _controller: IJVRSearchBundle:Default:singleArticle }
-
 ijvr_search_issue :
     path: /issue_search
     defaults: { _controller: IJVRSearchBundle:Default:searchForIssueFromAContainingArticle }
@@ -27,4 +26,10 @@ ijvr_advanced_search :
 
 ijvr_issue_content :
     path: /issuecontent/{id}
-    defaults: { _controller: IJVRSearchBundle:Default:searchForIssueFromAContainingArticle}            
+    defaults: { _controller: IJVRSearchBundle:Default:searchForIssueFromAContainingArticle}
+ijvr_profile_authors:
+    path:     /profile/{id}
+    defaults: { _controller: IJVRSearchBundle:Default:profileAuthors } 
+ijvr_all_issues:
+    path:     /issue/all
+    defaults: { _controller: IJVRSearchBundle:Default:AllIssues }           

@@ -22,33 +22,33 @@ class __TwigTemplate_bac37e1841697c32d60af52c87b9493496c898cf52f5024394fcdeb5c9c
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_3a8d2894732c9715a16029b500f96777be4ce4ef0189f3b53e1ad4c2e88fb70b = $this->env->getExtension("native_profiler");
-        $__internal_3a8d2894732c9715a16029b500f96777be4ce4ef0189f3b53e1ad4c2e88fb70b->enter($__internal_3a8d2894732c9715a16029b500f96777be4ce4ef0189f3b53e1ad4c2e88fb70b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "IJVRSearchBundle:Default:searchResult.html.twig"));
+        $__internal_821b34ed0ea0d2a8f3b1661afc1a5c792c8df7cc70f14df5af907c8f97f0a469 = $this->env->getExtension("native_profiler");
+        $__internal_821b34ed0ea0d2a8f3b1661afc1a5c792c8df7cc70f14df5af907c8f97f0a469->enter($__internal_821b34ed0ea0d2a8f3b1661afc1a5c792c8df7cc70f14df5af907c8f97f0a469_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "IJVRSearchBundle:Default:searchResult.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_3a8d2894732c9715a16029b500f96777be4ce4ef0189f3b53e1ad4c2e88fb70b->leave($__internal_3a8d2894732c9715a16029b500f96777be4ce4ef0189f3b53e1ad4c2e88fb70b_prof);
+        $__internal_821b34ed0ea0d2a8f3b1661afc1a5c792c8df7cc70f14df5af907c8f97f0a469->leave($__internal_821b34ed0ea0d2a8f3b1661afc1a5c792c8df7cc70f14df5af907c8f97f0a469_prof);
 
     }
 
     // line 3
     public function block_title($context, array $blocks = array())
     {
-        $__internal_7da5046a1b1c956aaafaa28aaa88da4345296544de28c04da73750a303948876 = $this->env->getExtension("native_profiler");
-        $__internal_7da5046a1b1c956aaafaa28aaa88da4345296544de28c04da73750a303948876->enter($__internal_7da5046a1b1c956aaafaa28aaa88da4345296544de28c04da73750a303948876_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
+        $__internal_a6d25bbf7a6afa8f6e8c69eac07c7a5730761166ca8f68c673208f5cfa69d16d = $this->env->getExtension("native_profiler");
+        $__internal_a6d25bbf7a6afa8f6e8c69eac07c7a5730761166ca8f68c673208f5cfa69d16d->enter($__internal_a6d25bbf7a6afa8f6e8c69eac07c7a5730761166ca8f68c673208f5cfa69d16d_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
 
         $this->displayParentBlock("title", $context, $blocks);
         echo " - Index";
         
-        $__internal_7da5046a1b1c956aaafaa28aaa88da4345296544de28c04da73750a303948876->leave($__internal_7da5046a1b1c956aaafaa28aaa88da4345296544de28c04da73750a303948876_prof);
+        $__internal_a6d25bbf7a6afa8f6e8c69eac07c7a5730761166ca8f68c673208f5cfa69d16d->leave($__internal_a6d25bbf7a6afa8f6e8c69eac07c7a5730761166ca8f68c673208f5cfa69d16d_prof);
 
     }
 
     // line 5
     public function block_body($context, array $blocks = array())
     {
-        $__internal_81eda52727fd5e1b1054a11f40d5716212fe27145bf7659fbac67063cf1bde65 = $this->env->getExtension("native_profiler");
-        $__internal_81eda52727fd5e1b1054a11f40d5716212fe27145bf7659fbac67063cf1bde65->enter($__internal_81eda52727fd5e1b1054a11f40d5716212fe27145bf7659fbac67063cf1bde65_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_b672b904ca727972b068f7991ec118e20ce2f232e38bf12f7227dc638e63398e = $this->env->getExtension("native_profiler");
+        $__internal_b672b904ca727972b068f7991ec118e20ce2f232e38bf12f7227dc638e63398e->enter($__internal_b672b904ca727972b068f7991ec118e20ce2f232e38bf12f7227dc638e63398e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
         // line 6
         echo "<br/>
@@ -286,10 +286,9 @@ class __TwigTemplate_bac37e1841697c32d60af52c87b9493496c898cf52f5024394fcdeb5c9c
 
 
  <script>
-console.log(\"dkhelt\")
 
 var datao = {  title : \"";
-        // line 120
+        // line 119
         echo twig_escape_filter($this->env, (isset($context["title"]) ? $context["title"] : $this->getContext($context, "title")), "html", null, true);
         echo "\"  ,  date:\"";
         echo twig_escape_filter($this->env, (isset($context["date"]) ? $context["date"] : $this->getContext($context, "date")), "html", null, true);
@@ -304,7 +303,7 @@ console.log(datao)
 console.log(\$(this).attr('class'))
 \$(\".col-md-12\").remove();
 console.log(\"";
-        // line 128
+        // line 127
         echo twig_escape_filter($this->env, (isset($context["title"]) ? $context["title"] : $this->getContext($context, "title")), "html", null, true);
         echo "\")
 console.log(datao)
@@ -326,9 +325,9 @@ console.log(datao)
 
 
 ";
-        // line 147
+        // line 146
         $context["base"] = $this->env->getExtension('asset')->getAssetUrl("");
-        // line 148
+        // line 147
         echo " \$.ajax({
          url: \"criteria_search\",          
          type: 'POST', //I want a type as POST
@@ -345,7 +344,7 @@ var uniqueDates= \$.unique(articles.map(function (d) {
 
 \t\t 
 \t\$(\"#AppendToElem\").append(\" <div class=\\\"col-md-12\\\"> <h2> Search Results <\\/h2> <p> <span>There are<\\/span> <strong>\"+articles.length+\"<\\/strong> <span> results for:<\\/span> <strong>";
-        // line 163
+        // line 162
         echo twig_escape_filter($this->env, (isset($context["title"]) ? $context["title"] : $this->getContext($context, "title")), "html", null, true);
         echo "<\\/strong> <\\/p> <p> <a class=\\\"btn\\\" href=\\\"#\\\"><\\/a> <\\/p> <div class=\\\"row\\\" id=\\\"AppendToRow\\\"> <div class=\\\"col-md-3\\\" id=\\\"AppendToCol3\\\"> <h3> Filter List <\\/h3> <div class=\\\"form-group\\\" id=\\\"checkboxDate\\\" > <label for=\\\"exampleInputEmail1\\\"> Year <\\/label><br>\");\t
 \t  \$.each(uniqueDates, function(index,jsonObject){
@@ -377,7 +376,7 @@ var uniqueDates= \$.unique(articles.map(function (d) {
 \t\t  \$.each(articles, function(index,jsonObject){
 \t   
         \$(\"#AppendToCol6\").append(\"<p> <\\/p> \\r\\n\\r\\n <div class=\\\"col-md-12\\\"  id=\\\"AppendToCol12\\\"> <a href=\\\"singleArticle/\"+jsonObject.id+\"\\\"><h3>\"+jsonObject.title+\"<\\/h3><\\/a> <dl> <dt> <h3>\" +jsonObject.issue.title+\" <\\/h3> <p> Volume \" +jsonObject.issue.volume.year+\"  <\\/p> <p> Article first published online : \"+jsonObject.date.date.substring(0,4)+\"<a href= ";
-        // line 192
+        // line 191
         echo twig_escape_filter($this->env, (isset($context["base"]) ? $context["base"] : $this->getContext($context, "base")), "html", null, true);
         echo "uploads/\"+jsonObject.pdf.url+\"/\"+jsonObject.pdf.id+\".pdf target=__blank> <img src=";
         echo twig_escape_filter($this->env, (isset($context["base"]) ? $context["base"] : $this->getContext($context, "base")), "html", null, true);
@@ -426,7 +425,7 @@ var uniqueDates= \$.unique(articles.map(function (d) {
 
 ";
         
-        $__internal_81eda52727fd5e1b1054a11f40d5716212fe27145bf7659fbac67063cf1bde65->leave($__internal_81eda52727fd5e1b1054a11f40d5716212fe27145bf7659fbac67063cf1bde65_prof);
+        $__internal_b672b904ca727972b068f7991ec118e20ce2f232e38bf12f7227dc638e63398e->leave($__internal_b672b904ca727972b068f7991ec118e20ce2f232e38bf12f7227dc638e63398e_prof);
 
     }
 
@@ -442,7 +441,7 @@ var uniqueDates= \$.unique(articles.map(function (d) {
 
     public function getDebugInfo()
     {
-        return array (  381 => 192,  349 => 163,  332 => 148,  330 => 147,  308 => 128,  293 => 120,  277 => 106,  260 => 103,  240 => 101,  232 => 95,  216 => 89,  210 => 86,  204 => 83,  195 => 79,  184 => 73,  176 => 67,  165 => 65,  161 => 64,  151 => 56,  140 => 54,  136 => 53,  127 => 46,  116 => 44,  112 => 43,  103 => 36,  92 => 34,  88 => 33,  67 => 17,  54 => 6,  48 => 5,  35 => 3,  11 => 1,);
+        return array (  380 => 191,  348 => 162,  331 => 147,  329 => 146,  307 => 127,  292 => 119,  277 => 106,  260 => 103,  240 => 101,  232 => 95,  216 => 89,  210 => 86,  204 => 83,  195 => 79,  184 => 73,  176 => 67,  165 => 65,  161 => 64,  151 => 56,  140 => 54,  136 => 53,  127 => 46,  116 => 44,  112 => 43,  103 => 36,  92 => 34,  88 => 33,  67 => 17,  54 => 6,  48 => 5,  35 => 3,  11 => 1,);
     }
 }
 /* {% extends "::layout.html.twig" %}*/
@@ -562,7 +561,6 @@ var uniqueDates= \$.unique(articles.map(function (d) {
 /* */
 /* */
 /*  <script>*/
-/* console.log("dkhelt")*/
 /* */
 /* var datao = {  title : "{{title}}"  ,  date:"{{date}}" , issueTitle :"{{issueTitle}}", keywords :[] , authors:[]} ;*/
 /* */

@@ -338,7 +338,35 @@ class LienLoginController extends BaseController
 	public function dashboardAction(Request $request)
     {   
 		//renvoi la page	
-		return $this->render('IJVRUserBundle:Default:dashboard.html.twig');
+
+    	$repository = $this->getDoctrine()
+			->getManager()
+			->getRepository('IJVRPublishBundle:Keyword')
+			;
+		
+		$keywords = $repository->findAll();
+
+		$cpt_keywords=array();
+
+		foreach($keywords as $key){
+			$repository = $this->getDoctrine()
+				->getManager()
+				->getRepository('IJVRPublishBundle:Article')
+			;
+
+			$articles=$repository->findByKeywords($key);
+
+			$cpt=count($articles);
+			array_push($cpt_keywords,$cpt);
+		}
+
+		array_multisort($cpt_keywords, $keywords, SORT_ASC);
+
+		$cpt_keywords=array_reverse($cpt_keywords);
+		$keywords=array_reverse($keywords);
+
+
+		return $this->render('IJVRUserBundle:Default:dashboard.html.twig',array('keywords' => $keywords , 'cpt' => $cpt_keywords));
 
 	}
 	
