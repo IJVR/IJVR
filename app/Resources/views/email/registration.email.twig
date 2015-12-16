@@ -1,0 +1,14 @@
+{% block subject %}IJVR Registration{% endblock %}
+
+{% block body_text %}
+{% autoescape false %}
+Hello {{ user.username }} !
+
+Welcome to IJVR !
+To finish activating your account - please visit {{ confirmationUrl }}
+Please, wait for Editor admission to be able to views the article.
+
+Greetings,
+the IJVR team
+{% endautoescape %}
+{% endblock %}

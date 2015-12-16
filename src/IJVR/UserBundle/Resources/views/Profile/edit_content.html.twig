@@ -1,0 +1,41 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="container">
+<h3>Edit My Profile</h3> <a href="{{path('fos_user_profile_show')}}">back</a>
+<div class="fos_user_user_edit"><br>
+
+
+<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+
+{{ form_row(form._token) }}
+	
+	{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+   
+	{{ form_label(form.email) }}
+	<div class="input-group">
+        <span class="input-group-addon ">@</span>  
+	{{ form_widget(form.email, {'attr': {'class': 'form-control vresize','placeholder':'Email'}}) }}
+	
+	</div>
+	
+	{{ form_label(form.username) }}
+	<div class="input-group">
+        <span class="input-group-addon "><i class="fa fa-user"></i></span>  
+	{{ form_widget(form.username, {'attr': {'class': 'form-control vresize','placeholder':'Username'}}) }}
+	</div>
+	
+	{{ form_label(form.current_password) }}
+	<div class="input-group">
+        <span class="input-group-addon "><i class="fa fa-user"></i></span>  
+	{{ form_widget(form.current_password, {'attr': {'class': 'form-control vresize','placeholder':'Current Password'}}) }}
+	</div>
+	
+	
+    {{ form_widget(form) }}
+       <div>
+	<br>
+        <input type="submit" class="btn btn-primary" value="{{ 'Edit'|trans }}" />
+    </div>
+</form>
+{{ form_end(form) }}
+<br><br><br></div>

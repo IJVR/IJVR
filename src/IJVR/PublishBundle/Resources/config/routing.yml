@@ -1,0 +1,21 @@
+ijvr_publish_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: IJVRPublishBundle:Default:index }
+
+ijvr_publish_index:
+    path:     /index
+    defaults: { _controller: IJVRPublishBundle:Default:index }
+
+ijvr_publish_guide:
+    path:     /guide
+    defaults: { _controller: IJVRPublishBundle:Default:guide }
+
+ijvr_publish_submit:
+    path:     /submit
+    defaults: { _controller: IJVRPublishBundle:Default:submit }
+ijvr_publish_edit:
+    path:     /edit/{id}
+    defaults: { _controller: IJVRPublishBundle:Default:edit }
+ijvr_publish_validation:
+    path:     /validation
+    defaults: { _controller: IJVRPublishBundle:Default:validation }

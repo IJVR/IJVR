@@ -1,0 +1,12 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+<br/>
+<br/>
+{% for article in articles %}
+        {{ article.title }}
+ {% endfor %}
+
+{% endblock %}

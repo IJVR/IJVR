@@ -1,0 +1,88 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}
+  Publish an issue - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+{% set alias = 'posts' %}
+
+<script>
+var availableTags = {{ volume |json_encode() | raw}};
+
+$( "#volume" ).autocomplete({
+      source: availableTags
+    });
+</script>
+<div class="container" >
+{% for message in app.session.flashbag.get('info') %}
+		<div style="background-color:#E17665;color:white;margin-top:10px;padding:10px;">
+			{{ message }}
+		</div>
+    {% endfor %}
+	
+	
+   <h2 style="">Publish an issue</h2>
+   
+   
+   
+   
+<div class="well">
+  {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+{{ form_widget(form._token) }}
+
+{# Les erreurs générales du formulaire. #}
+    {{ form_errors(form) }}
+
+    <div class="form-group">
+        {# Génération de l'input. #}
+        {{ form_widget(form.title, {'attr': {'class': 'form-control','placeholder': 'Title'}}) }}
+    </div>
+	
+	<div class="form-group">
+        {# Génération de l'input. #}
+        <input type="text" name="volume" id="volume" class="form-control" placeholder="Volume">
+    </div>
+
+	Here are the articles waiting to be published<br><br>
+		{%for post in articles%}
+		<div class="form-group">
+		<table><tr><td>
+			<input type="checkbox" name="mesIds[0][{{loop.index0}}]" value={{post.id}} >
+			</td><td style="padding-left:15px;">
+			<input type="text" class="form-control" name="mesIds[1][{{loop.index0}}]" placeholder="Pages: number-number">
+			</td>
+			</tr>
+			</table>
+		</div>
+
+		&nbsp;&nbsp;&nbsp; <strong>{{post.title}}</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						{%for a in post.authors%}
+										<a href="{{path('ijvr_profile_authors',{'id':a.id})}}" target="__blank">
+										{{a.name}} 
+										</a>
+										{%if loop.last%}
+										{%else%}
+										,  
+										{%endif%}
+									{%endfor%}
+									<br>
+									<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
+				<a target="_blank" href="{{ asset(post.pdf.webpath) }}"><img src="{{asset('/images/pdf.png')}}" height="30px"> Download pdf</a>
+				
+				<br><br>
+		
+	{%endfor%}
+
+    
+	<br><br>
+	<input id="submit" name="submitPaper" type="submit" value="Submit" class="btn btn-info">
+
+</div>
+	
+
+</div>
+
+{% endblock %}

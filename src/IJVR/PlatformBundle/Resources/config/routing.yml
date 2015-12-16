@@ -1,0 +1,21 @@
+ijvr_platform_view:
+    path:     /article/{id}
+    defaults: { _controller: IJVRPlatformBundle:Default:view }
+oc_platform_view_slug:
+    path:      /{year}/{slug}.{format}
+    defaults:  { _controller: IJVRPlatformBundle:Default:viewSlug }
+ijvr_platform_home:
+    path:     /home
+    defaults: { _controller: IJVRPlatformBundle:Default:home }
+ijvr_platform_contact : 
+    path:   /contact
+    defaults : {_controller: IJVRPlatformBundle:Default:contact}
+ijvr_platform_sendMail : 
+    path:   /sendMail
+    defaults: {_controller: IJVRPlatformBundle:Default:sendMail}
+ijvr_platform_about:
+    path:     /about
+    defaults: { _controller: IJVRPlatformBundle:Default:about }
+ijvr_platform_editorial_board : 
+    path:   /editorial_board
+    defaults : {_controller: IJVRPlatformBundle:Default:editorial_board}

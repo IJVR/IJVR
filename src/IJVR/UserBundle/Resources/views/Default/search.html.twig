@@ -1,0 +1,89 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}
+  Search - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+
+
+   <h2 style="">Search</h2>
+   
+   {%set i=0 %}   
+
+   <table class="table">
+   
+   <!-- Pour tous les utilisateurs trouvés-->
+   {%for user in users%}
+	
+		{%if i==0 %}
+			<th>
+				Voici les résultats correspondant à votre recherche<br><br>
+			</th>
+			<th></th>
+	   {%endif%}
+		<!-- Affichage nom + photo -->
+		<tr><td  onclick="document.location.href='{{ path('ywp_platform_profile',{'id': user.id}) }}'" style="cursor:pointer">
+		<a href="{{ path('ywp_platform_profile',{'id': user.id}) }}">
+		<img src="{{user.FacebookProfilePicture}}" width=50px height=50px></img>
+	   {{user.username}}</a>
+	   </td>
+	   
+	  
+	   <td align="right">
+	   <!-- Si utilisateur, bouton donner droits admin-->
+	   {% if is_granted("ROLE_ADMIN") and not user.granted("ROLE_ADMIN")%}   
+
+	   
+		   <button type="button" class="btn"  onclick="	  
+			   
+					$.ajax({
+						type:'POST',
+						url:'{{path('donne_admin',{'id': user.id})}}',
+						data:'act=donne',
+						success: function(){
+						window.location = '';
+						}
+					});">
+					
+			  <span class="glyphicon glyphicon-cog"  ></span>&nbsp;Donner les droits d'administrateur
+			  
+			</button>
+		  
+
+	   {%endif%}
+	    <!-- Si admin, bouton retirer droits admin-->
+	   {% if is_granted("ROLE_ADMIN") and user.granted("ROLE_ADMIN")%} 
+	   
+		   <button type="button" class="btn"  onclick="	  
+			   
+					$.ajax({
+						type:'POST',
+						url:'{{path('retire_admin',{'id': user.id})}}',
+						data:'act=retire',
+						success: function(){
+						window.location = '';
+						}
+					});">
+			  <span class="glyphicon glyphicon-cog"  ></span>&nbsp;Retirer les droits d'administrateur
+			  
+			  </button>
+		  
+	   {%endif%}
+			</td>
+	   </tr>
+	   {%set i=i+1%}
+	   
+	   <!-- Aucun utilisateur trouvé-->
+	   {%else%}	   
+	   Désolé, aucun utilisateur ne correspond à votre recherche
+   
+   {%endfor%}
+   </table>   
+
+</div>
+
+{% endblock %}

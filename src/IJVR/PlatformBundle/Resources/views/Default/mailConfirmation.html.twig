@@ -1,0 +1,17 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+<br/>
+<br/>
+<div align="center">
+{% if message == "success" %}
+<p> messsage sent successfully 
+<a href="{{ path('ijvr_platform_home') }}" >   go to home page  </a> </p>
+{% elseif message == "failure"  %}
+<p> messsage not sent  
+<a href="{{ path('ijvr_platform_contact') }}" >   retry  </a> </p>
+{% endif %}
+</div>
+{% endblock %}

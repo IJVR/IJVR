@@ -1,0 +1,324 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}
+   Access Management - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+   <h2 style="">Access Management</h2>
+   
+   {%set i=0 %}   
+   
+   <table class="table">
+		<th>
+			
+			Here you can manage the rigths you give to users
+		</th>
+	</table>
+
+
+<form action="{{path('search_user')}}" method="get">
+
+	    <div class="input-group">	    
+		      <input type="text" name="search" id="user_search" class="form-control" placeholder="Search a user">
+		      <span class="input-group-btn">
+		        <input type="submit" class="btn btn-default" value="Search">   
+		      </span>
+	     
+	    </div>
+
+ </form>
+
+ <script>
+  $(function() {
+    var availableTags = {{ names |json_encode() | raw}};;
+    $( "#user_search" ).autocomplete({
+
+    maxResults: 10,
+			source: function(request, response) {
+		        var results = $.ui.autocomplete.filter(availableTags, request.term);
+
+		        response(results.slice(0, this.options.maxResults));
+	},
+    
+
+    });
+  });
+  </script>
+
+
+<br><br><br>
+	<!--POUR TOUS LES ADMIN -->
+   <table class="table">
+   <th>
+				Administrators<br><br>
+	
+			</th>
+			<th>
+			</th>
+   {%for user in admins%}
+
+     <script>
+						  function delete_user(id) 
+								{
+								swal({  
+								title: "Are you sure ?", 
+								text: "The user will be deleted",
+								type: "warning",
+								showCancelButton: true, 
+								cancelButtonText: "No,don't delete",
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "Yes, delete the user", 
+								closeOnConfirm: false }
+								, 
+								function(){
+								
+								
+								var a= "{{ path('delete_user', {'id': '1' }) }}";
+								a=a.slice(0,a.length-1);
+								//console.log(a);
+								a+= id;
+								swal("User deleted !", "The user has successfully been deleted", "success"); 
+								location.href= a; 
+								
+								
+								});
+								}
+						  </script>
+   
+		{%if i==0 %}
+			
+		{%endif%}   
+   
+		<tr>
+			<!--ON LES AFFICHE-->
+			<td>				
+				   {{user.username}} (    <A HREF="mailto:{{user.email}}">{{user.email}}</A> )			  
+			</td>
+   
+			<!--PUIS ON MET UN BOUTON POUR RETIRER LES DROITS D'ADMIN-->
+			<td align="right">
+				<button type="button" class="btn btn-primary"  onclick="	   
+				$.ajax({
+						type:'POST',
+						url:'{{path('retire_admin',{'id': user.id})}}',
+						data:'act=retire',
+						success: function(){
+						window.location = '';
+						}
+				});">
+					<i class="fa fa-wrench"></i>&nbsp;Take back admin rigths
+				</button>
+				<button type="button" class="btn btn-danger" onclick="delete_user({{user.id}})"> <i class="fa fa-trash"></i>&nbsp;Delete</button>
+
+	  
+   
+			</td>
+		</tr>
+		{%set i=i+1%}
+   
+	{%else%}   
+			No admins
+   
+	{%endfor%}
+   	
+	<!--PAGINATION ADMIN-->				
+   </table>
+	
+   <br><br>
+   {%set i=0 %} 
+   
+   <!--POUR TOUS LES UTILISATEURS-->
+    <table class="table">
+	<th>
+					Users<br><br>
+	
+				</th>
+				<th></th>
+		{%for user in users%}
+
+		  <script>
+						  function delete_user(id) 
+								{
+								swal({  
+								title: "Are you sure ?", 
+								text: "The user will be deleted",
+								type: "warning",
+								showCancelButton: true, 
+								cancelButtonText: "No,don't delete",
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "Yes, delete the user", 
+								closeOnConfirm: false }
+								, 
+								function(){
+
+
+
+
+								var a= "{{ path('delete_user', {'id': '1' }) }}";
+								a=a.slice(0,a.length-1);
+								//console.log(a);
+								a+= id;
+								swal("User deleted !", "The user has successfully been deleted", "success"); 
+								location.href= a; 
+								
+
+	
+								});
+								}
+						  </script>
+   
+			{%if i==0 %}
+				
+			{%endif%}
+  
+			<tr>
+				<!--SON LES AFFICHE-->
+				<td>
+					
+					   {{user.username}} (<A HREF="mailto:{{user.email}}">{{user.email}}</A>)
+				 
+			   </td>
+				
+				 {% if not user.granted("ROLE_USER_PLUS") and not user.granted("ROLE_ADMIN") %}   
+	   <td align="right">
+	   <!-- Si utilisateur, bouton donner droits admin-->
+	   
+	   	<table><tr><td>
+	   
+		   <button type="button" class="btn btn-primary"  onclick="	  
+						   
+								$.ajax({
+									type:'POST',
+									url:'{{path('donne_admin',{'id': user.id})}}',
+									data:'act=donne',
+									success: function(){
+									window.location = '';
+									}
+								});"
+						>
+							<i class="fa fa-wrench"></i>&nbsp;Give admin rigths
+						</button>
+						
+						
+ 						
+ 						<button type="button" class="btn btn-primary"  onclick="	  
+						   
+								$.ajax({
+									type:'POST',
+									url:'{{path('donne_user_plus',{'id': user.id})}}',
+									data:'act=donne',
+									success: function(){
+									window.location = '';
+									}
+								});"
+						>
+							<i class="fa fa-wrench"></i>&nbsp;Give User Plus rigths
+						</button>
+						<button type="button" class="btn btn-danger" onclick="delete_user({{user.id}})"> <i class="fa fa-trash"></i>&nbsp;Delete</button>
+
+						</td>
+						</table>
+		  
+
+	   {%endif%}
+
+
+	   {% if user.granted("ROLE_USER_PLUS")%}   
+	   <td align="right">
+	   
+	   
+	   
+		  <table><tr><td>
+	   
+		   <button type="button" class="btn btn-primary"  onclick="	  
+						   
+								$.ajax({
+									type:'POST',
+									url:'{{path('donne_admin',{'id': user.id})}}',
+									data:'act=donne',
+									success: function(){
+									window.location = '';
+									}
+								});"
+						>
+							<i class="fa fa-wrench"></i>&nbsp;Give admin rigths
+						</button>
+						
+ 						
+ 						<button type="button" class="btn btn-primary"  onclick="	  
+						   
+								$.ajax({
+									type:'POST',
+									url:'{{path('retire_user_plus',{'id': user.id})}}',
+									data:'act=donne',
+									success: function(){
+									window.location = '';
+									}
+								});"
+						>
+							<i class="fa fa-wrench"></i>&nbsp;Take back User Plus rigths
+						</button>
+						<button type="button" class="btn btn-danger" onclick="delete_user({{user.id}})"> <i class="fa fa-trash"></i>&nbsp;Delete</button>
+
+						</td>
+						</table>
+		  
+
+	   {%endif%}
+	    <!-- Si admin, bouton retirer droits admin-->
+	   {% if  user.granted("ROLE_ADMIN")%} 
+	   
+		   <td align="right">
+				<table><tr><td>
+	   
+		   <button type="button" class="btn btn-primary"  onclick="	  
+						   
+								$.ajax({
+									type:'POST',
+									url:'{{path('retire_admin',{'id': user.id})}}',
+									data:'act=donne',
+									success: function(){
+									window.location = '';
+									}
+								});"
+						>
+							<i class="fa fa-wrench"></i>&nbsp;Take back admin rigths
+						</button>
+						
+ 						
+ 						<button type="button" class="btn btn-primary"  onclick="	  
+						   
+								$.ajax({
+									type:'POST',
+									url:'{{path('donne_user_plus',{'id': user.id})}}',
+									data:'act=donne',
+									success: function(){
+									window.location = '';
+									}
+								});"
+						>
+							<i class="fa fa-wrench"></i>&nbsp;Give User Plus rigths
+						</button>
+						<button type="button" class="btn btn-danger" onclick="delete_user({{user.id}})"> <i class="fa fa-trash"></i>&nbsp;Delete</button>
+						</td>
+						</table>
+		  
+	   {%endif%}
+				</td>
+			</tr>
+			{%set i=i+1%}
+   
+		{%else%}   
+			No users
+		{%endfor%}
+	</table>
+	<!--PAGINATION UTILISATEURS-->
+	
+	<br><br>
+</div>
+
+{% endblock %}

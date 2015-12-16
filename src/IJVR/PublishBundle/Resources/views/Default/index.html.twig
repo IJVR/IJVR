@@ -1,0 +1,59 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+
+<div class="container">
+	<h1>How to publish: step-by-step</h1>
+	<p>
+		The IJVR actively solicits papers of professionals in the fields of computer media, that serve to share the results of research and innovations with colleagues and interested parties around the rest of the world. Our hope is that authors will find the IJVR to be of extraordinary value to the profession.
+	</p>
+
+
+	<dl class="dl-horizontal">
+		<dt>
+			<h3>Step 1</h3>
+		</dt>
+
+		<dd>
+			<h3>Prepare your paper</h3>
+			<p> A checklist of the various things to be included in your paper is available <a href="{{path('ijvr_publish_guide')}}">here</a></p>
+		</dd>
+
+		<dt>
+			<h3>Step 2</h3>
+		</dt>
+
+		<dd>
+			<h3>Submit your paper</h3>
+			<p>You're ready to submit ? Got everything ready ? Let's do it !</p>
+ 
+			<div class="form-group">
+		        
+				<button type="button" class="btn btn-primary"  onClick="location.href='{{path('ijvr_publish_submit')}}'">Submit</button>
+		    </div>
+		</dd>
+
+
+
+		<dt>
+			<h3>Step 3</h3>
+		</dt>
+		<dd>
+			<h3>Track your paper</h3>
+			<p>Waiting for your paper to be publish, let's track your submition !
+			Have a look on your <a href="{{path('fos_user_profile_show')}}">profile</a> or just click below.
+			<br/> 
+			You may have some notifications from the editor during the publishing process</p>
+
+
+			<div class="form-group">
+		       <button type="button" class="btn btn-primary" onClick="location.href='{{path('fos_user_profile_show')}}'" >Track my paper
+				</button>
+		    </div>
+			<br/>
+		</dd>
+	</dl>
+</div>
+{% endblock %}

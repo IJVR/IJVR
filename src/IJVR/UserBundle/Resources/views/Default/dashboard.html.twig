@@ -1,0 +1,82 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}
+  Dashboard - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+<h2 style="">Dashboard</h2>
+<div class="col-md-4" style="float:left;width:30%">
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><h4>Most used Keywords</h4></div>
+
+  <!-- Table -->
+  <table class="table">
+
+  	{%for i in  1..20 %}
+  		<tr><td><h4>{{i}}</h4></td><td>
+		<h4>#{{keywords[i].keyword}} </h4>
+		</td>
+	{%endfor%}
+    
+  </table>
+</div>
+</div>
+
+<div style="float:left;width:70%">
+<h3>Change Metrics</h3>
+
+<br><br>
+
+First of all, you need to follow the instructions in this website <a href="https://www.mat.unical.it/ianni/wiki/ScholarHIndexCalculator"> https://www.mat.unical.it/ianni/wiki/ScholarHIndexCalculator</a> <br>
+You need to download the extension for your browser.
+You will need to configure it with a results per page setted to 20.
+<br><br>
+
+Then you go to google scholar, go to the adanced search box. <br>
+Fill the "Return articles published in" input box.<br>
+If you want to search articles between two dates, you can fill the "Return articles dated between" input box.<br><br>
+
+And you will have all the informations neeeded.<br><br>
+
+The number of results correspond to Articles published during the period of time you want.<br>
+With the extension previously downloaded, you will have a table.<br>
+In this table, you will have the citations part corresponding to Citations during the period of time you want.<br><br>
+
+
+
+<br><br><br>
+
+<form action="{{path('ijvr_changes')}}" method="post">
+Acceptance rate:
+<input type="text" name="acceptance_rate" placeholder="Acceptance rate" value="{{metrics.rate}}" class="form-control"><br>
+Review Delay:
+<input type="text" name="review_delay" placeholder="Review Delay" value="{{metrics.reviewDelay}}" class="form-control"><br>
+Publish Delay:
+<input type="text" name="publish_delay" placeholder="Publish Delay" value="{{metrics.publishDelay}}" class="form-control"><br>
+All time citations:
+<input type="text" name="citations" placeholder="All time citations" value="{{metrics.citations}}" class="form-control"><br>
+h-index:
+<input type="text" name="hindex" placeholder="h-index" value="{{metrics.hindex}}" class="form-control"><br>
+
+Citations during the period of time you want:<br>
+<input type="text" name="citations_between" placeholder="Citations during the period of time you want" value="{{metrics.citationsBetween}}" class="form-control"><br>
+
+Articles published during the period of time you want:<br>
+<input type="text" name="articles_between" placeholder="Articles published during the period of time you want" value="{{metrics.articlesBetween}}" class="form-control"><br>
+
+<br><br>
+<input type="submit" value="Change" class="btn btn-primary">
+</form>
+
+
+
+</div>  
+
+
+{% endblock %}

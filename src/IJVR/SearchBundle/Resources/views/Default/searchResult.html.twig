@@ -1,0 +1,273 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+<br/>
+<br/>
+
+
+<div class="container-fluid">
+	<div class="row" id="AppendToElem">
+		<div class="col-md-12">
+			<h2>
+				Search Results
+			</h2>
+			<p>
+				<span>There are</span> <strong>{{pagination|length}}</strong> <span>results for:</span> <strong>{{title}}</strong>
+			</p>
+			<p>
+				<a class="btn" href="#"></a>
+			</p>
+			<div class="row" id="AppendToRow" >
+				<div class="col-md-3">
+					<h3>
+						Filter List
+					</h3>
+					       
+					     <div>
+         						
+            					<a data-toggle = "collapdatase" -parent = "#AppendToRow" href = "#checkboxDate">
+              					 Year
+            					</a>
+         					
+      					</div>   
+						<div  id="checkboxDate" class = "panel-collapse collapse in">
+							 
+							
+							</label>
+							{% for date in dates %}
+							<input class="date" type="checkbox" value="{{date}}" /> {{date}}<br>
+							{% endfor %}
+						</div>
+						<br>
+						<div>
+         						
+            					<a data-toggle = "collapse" data-parent = "#AppendToRow" href = "#checkboxIssue">
+              					 Issue name
+            					</a>
+         					
+      					</div>   
+
+						<div class="panel-collapse collapse in" id="checkboxIssue">
+						
+							</label>
+							{% for issue in issues %}
+							<input class="issueTitle" type="checkbox" value="{{issue}}" /> {{issue}}<br>
+							{% endfor %}
+						</div>
+
+
+						<br>
+						<div>
+         						
+            					<a data-toggle = "collapse" data-parent = "#AppendToRow" href = "#checkboxKeywords">
+              					 Keywords
+            					</a>
+         					
+      					</div> 
+						<div class="form-group" id="checkboxKeywords">
+							 
+							</label>
+							{% for keyword in keywords %}
+							<input class="keywords" type="checkbox" value="{{keyword}}" /> {{keyword}}<br>
+							{% endfor %}
+						</div>
+
+						<br>
+						<div>
+         						
+            					<a data-toggle = "collapse" data-parent = "#AppendToRow" href = "#checkboxauthors">
+              					 Authors
+            					</a>
+         					
+      					</div> 
+						<div class="form-group" id="checkboxauthors">
+							 
+							</label>
+								{% for author in authors %}
+							<input class="authors" type="checkbox" value="{{author}}"/> {{author}}<br>
+								{% endfor %}
+						</div>
+						
+					
+				</div>
+				<div class="col-md-6">
+					<div class="row">
+						{% for article in pagination %} 
+						<p> </p>
+		
+						{% if article.status == 6 %}
+   
+
+						<div class="col-md-12">
+						
+							 <a href="{{path('ijvr_search_single_article',{'id':article.id})}}"><h3>{{ article.title }}</h3></a>
+							<dl>
+								<dt>
+									<h3>
+										{{article.issue.title}}
+									</h3>
+									<p>
+										Volume {{article.issue.volume.year}} , Pages: {{article.pages}}
+									</p>
+									<p>
+										Article first published online : {{article.date |date("m/d/Y")}} 
+										 {% if is_granted("ROLE_USER_PLUS") %}
+										<a href="{{asset(article.pdf.webpath)}}" target="__blank"><img src="{{asset('/images/pdf.png')}}" height="30px">											
+										</img> 
+
+										 Download PDF</a>
+									 {%endif%}
+									</p>
+								</dt>
+							</dl>
+						</div>
+						{% endif %}
+						{% endfor %}
+					</div>
+					<div class="navigation pagination" >
+    {{ knp_pagination_render(pagination) }}
+</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+ <script>
+
+ $(function () { $('#checkboxIssue').collapse('hide')});
+ $(function () { $('#checkboxKeywords').collapse('toggle')});
+  $(function () { $('#checkboxKeywords').collapse('hide')});
+ $(function () { $('#checkboxauthors').collapse('hide')});
+
+var datao = {  title : "{{title}}"  ,  date:"{{date}}" , issueTitle :"{{issueTitle}}", keywords :[] , authors:[],pageNumber:1} ;
+
+{% if  _authors is not  empty %}
+	datao["authors"]=($.parseJSON('{{ _authors| raw }}'));
+{% endif %}
+
+{% if  _keywords is not  empty %}
+	datao["keywords"]=($.parseJSON('{{ _keywords| raw }}'));
+{% endif %}
+
+
+$(document).on("click",".date, .issueTitle, .keywords, .authors, .page",function(event){
+
+$(this).attr('class')
+$(".col-md-12").remove();
+ if($(this).attr('class')==="date")
+	datao["date"]=$(this).val()
+if($(this).attr('class')==="issueTitle")
+	datao["issueTitle"]=$(this).val()
+if($(this).attr('class')==="keywords")
+	datao["keywords"].push($(this).val())
+if($(this).attr('class')==="authors")
+	datao["authors"].push($(this).val())
+if($(this).attr('class')=="page")
+	datao.pageNumber=parseInt($(this).text());
+else
+	datao.pageNumber=1;
+
+console.log(datao)
+
+{%set base=asset('')%}
+ $.ajax({
+         url: "criteria_search",          
+         type: 'POST', //I want a type as POST
+         data: datao,
+         success: function(data){ 
+         data=$.parseJSON(data)
+		 articles=data.articles
+		 pagesNumber=data.pagesNumber
+		 console.log(articles)
+		 console.log(pagesNumber)
+
+         var uniqueIssueTitles= $.unique(articles.map(function (d) {
+
+    return d.issue.title;}));
+         console.log("issue",uniqueIssueTitles)
+var uniqueDates= $.unique(articles.map(function (d) {
+    return d.issue.publish_date.date.substring(0,4);}));
+
+		 console.log($(this))
+	$("#AppendToElem").append(" <div class=\"col-md-12\"> <h2> Search Results <\/h2> <p> <span>There are<\/span> <strong>"+articles.length+"<\/strong> <span> results for:<\/span> <strong>{{title}}<\/strong> <\/p> <p> <a class=\"btn\" href=\"#\"><\/a> <\/p> <div class=\"row\" id=\"AppendToRow\"> <div class=\"col-md-3\" id=\"AppendToCol3\"> <h3> Filter List <\/h3> <div> <a data-toggle = \"collapse\" data-parent = \"#AppendToRow\" href = \"#checkboxDate\">  Year<\/a><\/div><div class=\"form-group\" id=\"checkboxDate\">  ");	
+	 
+
+
+
+	 	  $.each(uniqueDates, function(index,jsonObject){
+	   
+        $("#checkboxDate").append("<input class=\"date\" type=\"checkbox\" value="+jsonObject+" /> "+jsonObject+ "<br>") 
+         });
+
+	 
+ $("#AppendToCol3").append("<\/div> <div><a data-toggle = \"collapse\" data-parent = \"#AppendToRow\"href= \"#checkboxIssue\">Issue name <\/a><\/div>  <div class=\"form-group\" id=\"checkboxIssue\"> ");
+	 
+	  $.each(uniqueIssueTitles, function(index,jsonObject){
+	  	console.log("loopisue",jsonObject)
+	   
+        $("#checkboxIssue").append("<input  class=\"issueTitle\" type=\"checkbox\" value="+jsonObject+" /> "+jsonObject+ "<br>") 
+         });
+		 $("#AppendToCol3").append("<\/div>  <div><a data-toggle = \"collapse\" data-parent = \"#AppendToRow\"href= \"#checkboxkeywords\">Keywords <\/a><\/div>  <div class=\"form-group\" id=\"checkboxkeywords\">");
+		  $.each(articles, function(index,article){
+		  		$.each(article.keywords, function(index,keyword){
+		  $("#checkboxkeywords").append("<input class=\"keywords\" type=\"checkbox\" value="+keyword.keyword+" /> "+keyword.keyword+ "<br>") 
+		  			});
+         });
+
+
+		   $("#AppendToCol3").append("<\/div> <div><a data-toggle = \"collapse\" data-parent = \"#AppendToRow\"href= \"#checkboxauthors\">Authors <\/a><\/div>  <div class=\"form-group\" id=\"checkboxauthors\"> ");
+		  $.each(articles, function(index,article){
+		  		$.each(article.authors, function(index,author){
+		  $("#checkboxauthors").append("<input class=\"authors\" type=\"checkbox\" value="+author.name+" /> "+author.name+ "<br>") 
+		  			});
+         });
+
+
+
+
+		 $("#AppendToRow").append("<\/div> <\/div> <div class=\"col-md-6\" id=\"AppendToCol6\" > <div class=\"row\">")
+		  $.each(articles, function(index,jsonObject){
+	   		a="{{is_granted('ROLE_USER_PLUS') }}";
+		  	if(jsonObject.status == 6)
+		  		{
+
+		  	if(	a){
+
+        		$("#AppendToCol6").append("<p> <\/p> \r\n\r\n <div class=\"col-md-12\"  id=\"AppendToCol12\"> <a href=\"singleArticle/"+jsonObject.id+"\"><h3>"+jsonObject.title+"<\/h3><\/a> <dl> <dt> <h3>" +jsonObject.issue.title+" <\/h3> <p> Volume " +jsonObject.issue.volume.year+", Pages: "+ jsonObject.pages+"  <\/p> <p> Article first published online : "+jsonObject.date.date.substring(0,4)+"<a href= {{base}}uploads/"+jsonObject.pdf.url+"/"+jsonObject.pdf.id+".pdf target=__blank> <img src={{base}}images/pdf.png height=30px></img>&nbsp; Download PDF<\/a> <\/p> <\/dt> <\/dl> <\/div>") ;
+
+    		}
+
+    		else{
+
+    			$("#AppendToCol6").append("<p> <\/p> \r\n\r\n <div class=\"col-md-12\"  id=\"AppendToCol12\"> <a href=\"singleArticle/"+jsonObject.id+"\"><h3>"+jsonObject.title+"<\/h3><\/a> <dl> <dt> <h3>" +jsonObject.issue.title+" <\/h3> <p> Volume " +jsonObject.issue.volume.year+", Pages: "+ jsonObject.pages+"  <\/p> <p> Article first published online : "+jsonObject.date.date.substring(0,4)+" <\/p> <\/dt> <\/dl> <\/div>") ;
+    		}
+    	}
+         });
+		 
+		  $("#AppendToCol6").append(" <\/div > <ul  class=\"pagination\"> ");
+console.log(pagesNumber)
+		  for (i=0;i<pagesNumber/10;i++){
+		  	console.log(i)
+		   $(".pagination").append( " <li class=\"page\"> <a href=\"#\"  >"+(i+1)+"<\/a> <\/li> ")
+
+			}
+		 
+	$("#AppendToCol6").append(" <\/ul> <\/div> <\/div> <\/div>");
+       
+            $(".row").append("");
+         },
+       
+      });
+
+}
+);
+
+
+
+  </script>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+<br/>
+<br/>
+
+<div class="container">
+
+<h2>
+	{{author.name}}	
+</h2>
+<h4>
+Articles
+</h4>
+<table class="table table-hover table-bordered">
+{% for article in articles %} 
+<tr><td>
+						<p> </p>
+		
+
+						<div class="col-md-12">
+						
+							 <a href="{{path('ijvr_search_single_article',{'id':article.id})}}"><h3>{{ article.title }}</h3></a>
+							<dl>
+								<dt>
+
+									
+									 {{authors[loop.index0] | raw}}
+									<br>
+									
+									<p>
+				The International Journal of Virtual Reality, {{article.issue.publishdate |date("Y")}}, {{article.issue.volume.year}} ({{article.issue.title|slice(3, 2)}}): {{article.pages}}
+
+									</p>
+									<p>
+										{% if is_granted("ROLE_USER_PLUS") %}
+										 <a href="{{asset(article.pdf.webpath)}}" ><img src="{{asset('/images/pdf.png')}}" height="30px"></img>Download PDF</a>
+										 {%endif%}
+									</p>
+								</dt>
+							</dl>
+						</div>
+						</td></tr>
+						{% endfor %}
+						</table>
+
+</div>
+
+{% endblock %}

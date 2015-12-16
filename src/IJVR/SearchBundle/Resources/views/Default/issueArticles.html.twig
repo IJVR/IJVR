@@ -1,0 +1,98 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+<br/>
+<br/>
+
+ <div class="container">
+	<div class="row">
+		<div class="col-md-12">
+		<br></br>
+		</div>
+	</div>
+	<div class="row">
+		
+		
+		<div class="">
+			<div class="row">
+				<div class="col-md-2">
+					<img alt="Bootstrap Image Preview" src="{{asset('/images/logo.png')}}" height='10px' class="img-thumbnail"/>
+				</div>
+				<div class="col-md-6">
+					<h2>
+					{{articles[0].issue.title}}
+					</h2>
+					
+					<p>
+					Volume {{articles[0].issue.volume.year}} 	</p>
+					{{articles[0].issue.publishDate | date('Y')}}
+					
+				</div>
+			</div>
+			
+			<div class="row">
+					<div class="col-md-12">
+			<h2>
+				Articles
+			</h2>
+			
+			<p>
+				<a class="btn" href="#"></a>
+			</p>
+			<div class="row" id="AppendToRow">
+				
+				<div class="">
+					<div class="row">
+
+						<table class="table table-hover table-bordered">
+						{% for article in articles %} 
+						<tr><td>
+						<p> </p>
+		
+
+						<div class="col-md-12">
+						
+							 <a href="{{path('ijvr_search_single_article',{'id':article.id})}}"><h3>{{ article.title }}</h3></a>
+							<dl>
+								<dt>
+
+									
+									 {{authors[loop.index0] | raw}}
+									<br>
+									
+									<p>
+					
+					The International Journal of Virtual Reality, {{article.issue.publishdate |date("Y")}}, {{article.issue.volume.year}} ({{article.issue.title|slice(3, 2)}}): {{article.pages}}
+
+									</p>
+									<p>
+
+									 {% if is_granted("ROLE_USER_PLUS") %}
+										 <a href="{{asset(article.pdf.webpath)}}" ><img src="{{asset('/images/pdf.png')}}" height="30px"></img>Download PDF</a>
+									 {%endif%}
+									</p>
+								</dt>
+							</dl>
+						</div>
+						</td>
+						{% endfor %}
+						</table>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+			</div>
+			
+	
+	</div>
+</div>
+
+
+
+
+
+{% endblock %}

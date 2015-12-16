@@ -1,0 +1,149 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+<link href="{{ asset('css/home.css.twig') }}" rel="stylesheet" />
+<div class="container">
+
+<h2>Welcome to the International Journal of Virtual Reality (IJVR)</h2>
+<br>
+<address>
+  <strong>
+ISSN:</strong> 1081-1451
+</address>
+<br>
+The IJVR is a professional journal dedicated to the promotion and publication of new research and technology in the realm of Virtual Reality. The information regarding this new and constantly emerging technology is of interest to computer media professionals worldwide as well as others interested in the expanding potential of virtual reality. The journal has been published since 1995 when virtual reality was still in its infancy. 
+<br><br>
+International Journal of Virtual Reality solicites contributions
+describing original research results, applications, and experience in all
+fields of Virtual Reality.<br><br><br>
+
+
+
+
+<style>
+@media(max-width:767px){
+	#metrics{
+		float:left;
+		width: 100%;
+	}
+
+	#big-screen{
+
+		 display: none;
+	}
+
+}
+
+
+@media(min-width:768px){
+	#metrics{
+		float:right;
+		width: 35%;
+	}
+
+	#small-screen{
+
+		 display: none;
+	}
+
+}
+
+</style>
+
+
+<div  id="metrics" >
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Metrics</h3>
+  </div>
+  <div class="panel-body">
+    Acceptance rate : <font color="#0ce3ac">{{metrics.rate}}</font><br>
+    Average delays for reviews : <font color="#0ce3ac">{{metrics.reviewDelay}}</font> <br/>
+    Acceptance delays for publication : <font color="#0ce3ac">{{metrics.publishDelay}}</font><br>
+   
+   <br>
+    Journal Impact Factor : <font color="#0ce3ac">{{(metrics.CitationsBetween / metrics.ArticlesBetween) |round(2, 'floor') }}</font>  <font size=1>(2-year Google-based Journal Impact Factor) </font> <br>
+    h-index:<font color="#0ce3ac">{{metrics.hindex}}</font><br>
+    
+    <br>
+    Start Year: <font color="#0ce3ac">1995</font><br>
+
+    Years of publishing: <font color="#0ce3ac">{{ "now" |	date("Y") - 1995 }}</font><br>
+    Number of articles published on this website: <font color="#0ce3ac">{{count}}</font><br>
+	Total number of citations since journal start:  <font color="#0ce3ac"> {{metrics.citations}}</font><br>
+  </div>
+</div>
+
+</div>
+
+<div width="65%" style="float:left">
+<h2>Last issue</h2>
+		{%if article[0] is defined %}
+		Published on: {{article[0].publishDate | date("m/d/Y")}}<br><br>
+		{%endif%}
+		<div class="col-md-12">
+			<div class="row">
+				<div >			
+				    
+										
+					<table class="table table-hover table-bordered">
+						{%for a in article%}
+							<tr><td>
+								<a href="{{path('ijvr_search_single_article',{'id':a.id})}}"> {{a.title}} </a>
+
+								</td>
+							</tr>
+						{%endfor%}
+					</table>
+					<br>
+					<a href="{{path('ijvr_all_issues')}}">All the issues</a>
+				</div>
+			</div>
+			
+			
+			
+		</div>
+	
+</div>
+
+
+
+
+
+<div class="row" id="big-screen">
+<div id="small-img" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center">
+<br><br><br>
+  <ul>
+    <li><img src="{{asset('images/1.jpg')}}"  style="width:300px;height:220px;"  alt="Issue01" class="img-responsive inline-block" alt="Responsive image"/></li>
+    <li><img src="{{asset('images/2.jpg')}}"  style="width:300px;height:220px;"  alt="Issue02" class="img-responsive inline-block" alt="Responsive image"/></li>
+    <li><img src="{{asset('images/3.png')}}"  style="width:300px;height:220px;"  alt="Issue03" class="img-responsive inline-block" alt="Responsive image"/></li>
+   </ul>            
+</div>
+
+<br><br><br>
+</div>
+
+
+<div class="row" id="small-screen">
+
+<div id="small-img" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center">
+	<br><br><br>
+    <img src="{{asset('images/1.jpg')}}"  style="width:300px;height:220px;"  alt="Issue01" class="img-responsive inline-block" alt="Responsive image"/>
+    <img src="{{asset('images/2.jpg')}}"  style="width:300px;height:220px;"  alt="Issue02" class="img-responsive inline-block" alt="Responsive image"/>
+    <img src="{{asset('images/3.png')}}"  style="width:300px;height:220px;"  alt="Issue03" class="img-responsive inline-block" alt="Responsive image"/>
+          
+</div>
+
+<br><br><br>
+</div>
+
+
+
+
+
+
+</div>
+{% endblock %}
+

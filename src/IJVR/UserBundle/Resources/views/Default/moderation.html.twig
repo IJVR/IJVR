@@ -1,0 +1,317 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}
+  Moderation - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+{% set alias = 'posts' %}
+
+<div class="container" >
+
+   <h2 style="">Moderation</h2>
+   <table>
+	   <th>
+		   You need to moderate these articles<br><br>
+		</th>
+		<th>
+		</th>
+	</table>
+   
+   
+   <div class="bs-example">
+	<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#uploaded">Just being uploaded ( {{ posts|length }} )</a></li>
+    <li><a data-toggle="tab" href="#read">Being read ( {{ read|length }} )</a></li>
+    <li><a data-toggle="tab" href="#corrected">Corrected ( {{ correction|length }} )</a></li>	
+    <li><a data-toggle="tab" href="#wait">Waiting to be published ( {{ wait|length }} )</a></li>
+	</ul>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+
+      <form action="" method="post" name="formulaire">
+      <textarea class="form-control" rows="3" name="commentaire" placeholder="Write your comment about the corection to make here"></textarea>
+      <input type="submit" name="comment" value="Comment" class="btn btn-primary" onClick="url()">
+      </form>
+
+      </div>
+     
+    </div>
+  </div>
+</div>
+<script>
+var recipient=null;
+$('#myModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  recipient = button.data('post') // Extract info from data-* attributes
+  var modal = $(this)
+  modal.find('.modal-title').text('Write a comment')
+
+});
+
+function url(){
+  //var button = $(event.relatedTarget) // Button that triggered the modal
+  //var recipient = button.data('post') // Extract info from data-* attributes
+ 
+  var url = '{{ path("correction_to_make", { "id": "variable" }) }}';
+  url = url.replace("variable", recipient);
+
+  document.formulaire.action = url;
+  document.formulaire.submit();
+
+}
+</script>
+	
+
+<div class="tab-content">
+        <div id="uploaded" class="tab-pane fade in active">
+	   <h4>Articles just being uploaded</h4><br><br>
+   {%set i=0 %}   
+   <table class="table">
+
+		<!--AFFICHE TOUS LES POSTS A MODERER-->
+	   {%for post in posts%}
+	   
+	   {%if i==0 %}
+	   
+	   {%endif%}
+	   <tr>
+			<!--AFFICHE DU POST A MODERER-->
+			<td >
+				<h3>{{post.title}}</h3><br>
+				
+				{%for a in post.authors%}
+										<a href="{{path('ijvr_profile_authors',{'id':a.id})}}" target="__blank">
+										{{a.name}} 
+										</a>
+										{%if loop.last%}
+										{%else%}
+										,  
+										{%endif%}
+									{%endfor%}
+									<br>
+									<br><a target="_blank" href="{{ asset(post.pdf.webpath) }}"><img src="{{asset('/images/pdf.png')}}" height="30px"> Download pdf</a>
+				<br><br>
+				Abstract: {{post.abstract}}<br>
+			</td>	   
+			<!--AFFICHE DES BOUTONS DE MODERATION-->
+			<td align="right" width="200px;">
+				
+				<div class="btn-group">
+				  <button type="button" class="btn btn-primary">Moderation</button>
+				  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span class="caret"></span>
+					<span class="sr-only">Toggle Dropdown</span>
+				  </button>
+				  <ul class="dropdown-menu">					
+
+					<li><a href="{{path('being_read',{'id': post.id})}}">Is being read</a></li>
+					<li><a data-toggle="modal" data-target="#myModal" data-post="{{post.id}}">Correction to make</a></li>
+					<li role="separator" class="divider"></li>
+					<li><a href="{{path('rejected',{'id': post.id})}}">Rejected</a></li>
+					<li><a href="{{path('waiting_to_publish',{'id': post.id})}}">Waiting to be published</a></li>					
+				  </ul>
+				</div>
+			</td>
+	   </tr>
+	   {%set i=i+1%}	   
+	   {%else%}	   
+			No article to moderate
+	   {%endfor%}
+	  
+	</table>
+	
+	</div>
+	
+     <div id="read" class="tab-pane fade">
+	<h4> Articles being read</h4><br><br>
+	{%set i=0 %}   
+   <table class="table">
+		<!--AFFICHE TOUS LES POSTS A MODERER-->
+	   {%for post in read%}
+	   
+	   {%if i==0 %}
+
+	   {%endif%}
+	   <tr>
+			<!--AFFICHE DU POST A MODERER-->
+			<td >
+				<h3>{{post.title}}</h3><br>
+				
+				{%for a in post.authors%}
+										<a href="{{path('ijvr_profile_authors',{'id':a.id})}}" target="__blank">
+										{{a.name}} 
+										</a>
+										{%if loop.last%}
+										{%else%}
+										,  
+										{%endif%}
+									{%endfor%}
+									<br>
+									<br><a target="_blank" href="{{ asset(post.pdf.webpath) }}"><img src="{{asset('/images/pdf.png')}}" height="30px"> Download pdf</a>
+				<br><br>
+				Abstract: {{post.abstract}}<br>
+				
+			</td>	   
+			<!--AFFICHE DES BOUTONS DE MODERATION-->
+			<td align="right" width="200px;">
+				
+				<div class="btn-group">
+				  <button type="button" class="btn btn-primary">Moderation</button>
+				  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span class="caret"></span>
+					<span class="sr-only">Toggle Dropdown</span>
+				  </button>
+				  <ul class="dropdown-menu">					
+					<li><a href="{{path('just_uploaded',{'id': post.id})}}">Just uploaded</a></li>
+					
+					<li><a data-toggle="modal" data-target="#myModal" data-post="{{post.id}}">Correction to make</a></li>
+					<li role="separator" class="divider"></li>
+					<li><a href="{{path('rejected',{'id': post.id})}}">Rejected</a></li>
+					<li><a href="{{path('waiting_to_publish',{'id': post.id})}}">Waiting to be published</a></li>								
+				  </ul>
+				</div>
+			</td>
+	   </tr>
+	   {%set i=i+1%}	   
+	   {%else%}	   
+			No article to moderate
+	   {%endfor%}
+	  
+	</table>
+	</div>
+
+    <div id="corrected" class="tab-pane fade">
+	<h4> Articles corrected</h4><br><br>
+	{%set i=0 %}   
+   <table class="table">
+
+		<!--AFFICHE TOUS LES POSTS A MODERER-->
+	   {%for post in correction%}
+	   
+	   {%if i==0 %}
+
+	   {%endif%}
+	   <tr>
+			<!--AFFICHE DU POST A MODERER-->
+			<td >
+				<h3>{{post.title}}</h3><br>
+				
+				{%for a in post.authors%}
+										<a href="{{path('ijvr_profile_authors',{'id':a.id})}}" target="__blank">
+										{{a.name}} 
+										</a>
+										{%if loop.last%}
+										{%else%}
+										,  
+										{%endif%}
+									{%endfor%}
+									<br>
+									<br><a target="_blank" href="{{ asset(post.pdf.webpath) }}"><img src="{{asset('/images/pdf.png')}}" height="30px"> Download pdf</a>
+				<br><br>
+				Abstract: {{post.abstract}}<br>
+			</td>	   
+			<!--AFFICHE DES BOUTONS DE MODERATION-->
+			<td align="right" width="200px;">
+				
+				<div class="btn-group">
+				  <button type="button" class="btn btn-primary">Moderation</button>
+				  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span class="caret"></span>
+					<span class="sr-only">Toggle Dropdown</span>
+				  </button>
+				  <ul class="dropdown-menu">
+					<li><a href="{{path('just_uploaded',{'id': post.id})}}">Just uploaded</a></li>
+					<li><a href="{{path('being_read',{'id': post.id})}}">Is being read</a></li>
+					<li><a data-toggle="modal" data-target="#myModal" data-post="{{post.id}}">Correction to make</a></li>
+					<li role="separator" class="divider"></li>
+					<li><a href="{{path('rejected',{'id': post.id})}}">Rejected</a></li>
+					<li><a href="{{path('waiting_to_publish',{'id': post.id})}}">Waiting to be published</a></li>			
+				  </ul>
+				</div>
+			</td>
+	   </tr>
+	   {%set i=i+1%}	   
+	   {%else%}	   
+			No article to moderate
+	   {%endfor%}
+	  
+	</table>
+	
+	</div>
+
+
+
+	<div id="wait" class="tab-pane fade">
+	<h4> Articles waiting to be published</h4><br><br>
+	{%set i=0 %}   
+   <table class="table">
+
+		<!--AFFICHE TOUS LES POSTS A MODERER-->
+	   {%for post in wait%}
+	   
+	   {%if i==0 %}
+
+	   {%endif%}
+	   <tr>
+			<!--AFFICHE DU POST A MODERER-->
+			<td >
+				<h3>{{post.title}}</h3><br>
+				
+				{%for a in post.authors%}
+										<a href="{{path('ijvr_profile_authors',{'id':a.id})}}" target="__blank">
+										{{a.name}} 
+										</a>
+										{%if loop.last%}
+										{%else%}
+										,  
+										{%endif%}
+									{%endfor%}
+									<br>
+									<br><a target="_blank" href="{{ asset(post.pdf.webpath) }}"><img src="{{asset('/images/pdf.png')}}" height="30px"> Download pdf</a>
+				<br><br>
+				Abstract: {{post.abstract}}<br>
+			</td>	   
+			<!--AFFICHE DES BOUTONS DE MODERATION-->
+			<td align="right" width="200px;">
+				
+				<div class="btn-group">
+				  <button type="button" class="btn btn-primary">Moderation</button>
+				  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span class="caret"></span>
+					<span class="sr-only">Toggle Dropdown</span>
+				  </button>
+				  <ul class="dropdown-menu">
+					<li><a href="{{path('just_uploaded',{'id': post.id})}}">Just uploaded</a></li>
+					<li><a href="{{path('being_read',{'id': post.id})}}">Is being read</a></li>
+					<li><a data-toggle="modal" data-target="#myModal" data-post="{{post.id}}">Correction to make</a></li>
+					<li role="separator" class="divider"></li>
+					<li><a href="{{path('rejected',{'id': post.id})}}">Rejected</a></li>
+						
+				  </ul>
+				</div>
+			</td>
+	   </tr>
+	   {%set i=i+1%}	   
+	   {%else%}	   
+			No article to moderate
+	   {%endfor%}
+	  
+	</table>
+	
+	</div>
+
+    </div></div>
+	
+</div>
+
+{% endblock %}

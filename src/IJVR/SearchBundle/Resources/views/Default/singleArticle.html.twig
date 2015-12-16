@@ -1,0 +1,95 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+
+ <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+		<br></br>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2">
+			
+		</div>
+		<div class="col-md-6">
+			<div class="row">
+				<div class="col-md-2">
+					<img alt="Bootstrap Image Preview" src="{{asset('/images/logo.png')}}" height='100px' class="img-thumbnail"/>
+				</div>
+				<div class="col-md-6">
+					<h2>
+					{{article.title}}
+					</h2>
+
+						{{authors | raw}}
+
+
+					<br>
+					 <a href="{{path('ijvr_issue_content',{'id':article.id})}}" class="btn" type="button">I{{article.issue.title}}</a>
+					<p>
+					The International Journal of Virtual Reality, {{article.issue.publishdate |date("Y")}}, {{article.issue.volume.year}} ({{article.issue.title|slice(3, 2)}}): {{article.pages}}
+					</p>
+					
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<h3 class="text-muted">
+						Abstract
+					</h3>
+					<p >
+						
+			{{article.abstract}}	</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+						<h3 class="text-muted">
+						Keywords
+					</h3>
+					<p>				
+	{% for keyword in article.keywords %} {{keyword.keyword}}	{% endfor %}</p>
+				
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<table><tr><td>
+			<img src="{{asset('/images/pdf.png')}}" height="50px"></img> </td><td>
+			 {% if is_granted("ROLE_USER_PLUS") %}
+			 <a href="{{asset(article.pdf.webpath)}}" target="__blank"><h3>Download PDF</h3></a>
+
+			 {%else%}
+
+			 	{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+			 		You are not authorized to download the pdf file, you have to wait until the administrator give you access.
+			 	{%else%}
+
+			 		You are not authorized to download the pdf file, please <a href="{{path('fos_user_security_login')}}" >Log in </a>
+			 	{%endif%}
+
+			 {%endif%}
+			 </td></tr></table>
+			<div class="row">
+				<div class="col-md-12">
+					
+
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+
+

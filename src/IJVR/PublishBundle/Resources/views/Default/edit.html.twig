@@ -1,0 +1,131 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+
+<div class="container" style=" width:100%;">
+	<h1>Edit you paper</h1>
+  <br/>
+  
+  <script type="text/javascript">
+$(document).ready(function(){
+  $('.glyphicon').hide();
+});
+
+</script>
+
+
+<div class="well">
+<!--<div class="well">-->
+{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+{{ form_widget(form._token) }}
+
+{# Les erreurs générales du formulaire. #}
+    {{ form_errors(form) }}
+
+    <div class="form-group" >
+
+      {# Génération du label Title #}
+      {{ form_label(form.title, "Article's Title", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+
+      {# Affichage des erreurs pour ce champ précis. #}
+      {{ form_errors(form.title) }}
+
+      <div class="col-sm-3" style="width:50%;">
+        {# Génération de l'input. #}
+        {{ form_widget(form.title, {'attr': {'class': 'form-control','placeholder':'Title'}}) }}
+      </div>
+    </div>
+	
+	<div class="form-group">
+	{{ form_label(form.abstract, "Article's Authors", {'label_attr': {'class': 'col-sm-2 control-label'}}) }} 
+	<div class="col-sm-3" style="width:50%;">
+	<input type="text" class="form-control vresize" id="tokenfield_img" value="" name="Authors" placeholder="Authors (separated by a coma)">
+	</div>
+    </div>
+	
+	
+	<div class="form-group">
+	{{ form_label(form.abstract, "Article's Keywords", {'label_attr': {'class': 'col-sm-2 control-label'}}) }} 
+	<div class="col-sm-3" style="width:50%;">
+	<input type="text" class="form-control vresize" id="tokenfield" name="Keywords" placeholder="Keywords (separated by a coma)">
+	</div>
+    </div>
+	
+	<script>
+
+		var liste_auteurs = {{ authors |json_encode() | raw}};
+		var liste_keywords={{ keywords |json_encode() | raw}};
+
+		//$('#tokenfield_img').val(list_tags);
+		
+
+
+		
+
+
+		$('#tokenfield_img').tokenfield({
+		  autocomplete: {
+		  	maxResults: 7,
+			source: function(request, response) {
+		        var results = $.ui.autocomplete.filter(liste_auteurs, request.term);
+
+		        response(results.slice(0, this.options.maxResults));
+		    },
+			delay: 10
+		  },
+
+
+		  showAutocompleteOnFocus: false
+		})
+		
+		$('#tokenfield').tokenfield({
+		  autocomplete: {
+			maxResults: 5,
+			source: function(request, response) {
+		        var results = $.ui.autocomplete.filter(liste_keywords, request.term);
+
+		        response(results.slice(0, this.options.maxResults));
+		    },
+			delay: 10
+		  },
+
+
+		  showAutocompleteOnFocus: false
+		})
+
+		$('#tokenfield_img').tokenfield('setTokens', {{authors_art |json_encode() | raw}});
+		$('#tokenfield').tokenfield('setTokens', {{keywords_art |json_encode() | raw}});
+
+
+	</script>
+
+    <div class="form-group">
+      {{ form_label(form.abstract, "Abstract", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+      {{ form_errors(form.abstract) }}
+      <div class="col-sm-3" style="width:50%;">
+        {{ form_widget(form.abstract, {'attr': {'class': 'form-control vresize','placeholder':'Abstract'}}) }}
+      </div>
+    </div>
+
+	<div class="form-group">
+      {{ form_label(form.pdf,'Upload you pdf', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+      {{ form_errors(form.pdf) }}
+      <div class="col-sm-3" style="width:50%;">
+        {{ form_widget(form.pdf.file, { 'attr':{'class':'file'}}  ) }}
+      </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-10 col-sm-offset-2">
+      <input id="submit" name="submitPaper" type="submit" value="Edit" class="btn btn-primary">
+    </div>
+  </div>
+
+
+{{form_end(form)}}
+</div>
+</div>
+{% endblock %}
